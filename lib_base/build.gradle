@@ -35,7 +35,20 @@ dependencies {
     implementation rootProject.ext.dependencies.appcompat
     implementation rootProject.ext.dependencies.material
 
+    //网络请求
+    implementation rootProject.ext.dependencies.retrofit
+    implementation rootProject.ext.dependencies.retrofitGson
+    implementation rootProject.ext.dependencies.retrofitRxJava
+    implementation rootProject.ext.dependencies.okHttp
+    implementation rootProject.ext.dependencies.okHttpLogging
+    implementation rootProject.ext.dependencies.glide
+    implementation rootProject.ext.dependencies.glideTransformations
+    implementation rootProject.ext.dependencies.gson
 
+    //rx
+    implementation rootProject.ext.dependencies.rxAndroid
+    implementation rootProject.ext.dependencies.rxJava
+    implementation rootProject.ext.dependencies.rxBus
 
 
     testImplementation rootProject.ext.dependencies.junit
