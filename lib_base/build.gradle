@@ -36,19 +36,22 @@ dependencies {
     implementation rootProject.ext.dependencies.material
 
     //网络请求
-    implementation rootProject.ext.dependencies.retrofit
-    implementation rootProject.ext.dependencies.retrofitGson
-    implementation rootProject.ext.dependencies.retrofitRxJava
-    implementation rootProject.ext.dependencies.okHttp
-    implementation rootProject.ext.dependencies.okHttpLogging
-    implementation rootProject.ext.dependencies.glide
-    implementation rootProject.ext.dependencies.glideTransformations
-    implementation rootProject.ext.dependencies.gson
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.retrofitGson
+    api rootProject.ext.dependencies.retrofitRxJava
+    api rootProject.ext.dependencies.okHttp
+    api rootProject.ext.dependencies.okHttpLogging
+    api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.glideTransformations
+    api rootProject.ext.dependencies.gson
 
     //rx
-    implementation rootProject.ext.dependencies.rxAndroid
-    implementation rootProject.ext.dependencies.rxJava
-    implementation rootProject.ext.dependencies.rxBus
+    api rootProject.ext.dependencies.rxAndroid
+    api rootProject.ext.dependencies.rxJava
+    api rootProject.ext.dependencies.rxBus
+
+    //gif加载框架
+    api rootProject.ext.dependencies.gifView
 
 
     testImplementation rootProject.ext.dependencies.junit

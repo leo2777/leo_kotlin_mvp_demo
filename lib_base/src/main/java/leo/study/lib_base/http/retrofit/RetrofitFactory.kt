@@ -26,6 +26,8 @@ import kotlin.math.log
  *this developer is 冯立仁
  *this developer QQ is 2549732107
  * ***********************************************************************
+ *
+ * 使用：继承当前类，并且实现里面的方法即可，后续示例话继承的哪个类就可以
  */
 abstract class RetrofitFactory<T>() {
     //超时时间
