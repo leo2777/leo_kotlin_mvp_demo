@@ -32,14 +32,66 @@ import java.util.logging.Logger
  */
 interface ITopView : LifecycleOwner {
 
+    /**
+     * 获取上下文
+     *
+     * @return context
+     */
     fun getContext(): Context?
+
+    /**
+     * 初始化完毕，
+     * 用户绑定Presenter
+     */
     fun initEnd();
+
+    /**
+     * 结束当前页面
+     *
+     * @param resultCode 返回结果代码
+     */
     fun finish(resultCode: Int = Activity.RESULT_CANCELED)
+
+    /**
+     * 显示加载框
+     *
+     * @param isTimer 是否自动消失，true:显示一定时间消失，false:一直显示
+     */
     fun showLoading(isTimer: Boolean)
+
+    /**
+     * 显示自定义文字加载框
+     *
+     * @param msg 显示文字
+     * @param isTimer 是否自动消失，true:显示一定时间消失，false:一直显示
+     */
     fun showLoading(msg: String,isTimer: Boolean)
+
+    /**
+     * 显示自定义文字加载框（资源文件）
+     *
+     * @param msgId 资源文件ID
+     * @param isTimer 是否自动消失，true:显示一定时间消失，false:一直显示
+     */
     fun showLoading(@StringRes msgId: Int,isTimer: Boolean)
+
+    /**
+     * 关闭加载框
+     */
     fun dismissLoading()
-    fun showToast(@NotNull message: String)
+
+    /**
+     * 显示吐司
+     *
+     * @param message 显示文字
+     */
+    fun showToast(message: String)
+
+    /**
+     * 显示吐司 （资源文件ID）
+     *
+     * @param messageId 资源文件id
+     */
     fun showToast(@StringRes messageId: Int)
 }
 
@@ -47,6 +99,11 @@ interface ITopView : LifecycleOwner {
  * P层，顶级基础方法
  */
 interface ITopPresenter : LifecycleObserver {
+    /**
+     * 关联 view
+     *
+     * @param view
+     */
     fun attachView(view: ITopView)
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
