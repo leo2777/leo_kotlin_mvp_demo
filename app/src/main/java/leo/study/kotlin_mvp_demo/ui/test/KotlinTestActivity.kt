@@ -1,29 +1,30 @@
 package leo.study.kotlin_mvp_demo.ui.test
 
+
 import android.view.View
+import android.view.View.OnClickListener
 import android.widget.Toast
+import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.databinding.ActivityKotlinTestBinding
 import leo.study.kotlin_mvp_demo.utils.ToastyUtils
+import leo.study.lib_base.image.ImageLoaderHelper
 import leo.study.lib_base.mvp.BaseMvpActivity
 
-class KotlinTestActivity : BaseMvpActivity<TestContract.View,TestContract.Presenter>(),TestContract.View {
+class KotlinTestActivity: BaseMvpActivity<ActivityKotlinTestBinding,TestContract.View,TestContract.Presenter>(),TestContract.View,OnClickListener {
 
 
-    private lateinit var binding: ActivityKotlinTestBinding;
-
-    override fun getContentView(): View {
-        binding = ActivityKotlinTestBinding.inflate(layoutInflater)
-        return binding.root
+    override fun getContext(): BaseMvpActivity<ActivityKotlinTestBinding, TestContract.View, TestContract.Presenter> {
+        return this
     }
 
-    override fun getContext(): BaseMvpActivity<TestContract.View, TestContract.Presenter> {
-        return this
+    override fun getViewBinding(): ActivityKotlinTestBinding {
+        return ActivityKotlinTestBinding.inflate(layoutInflater)
     }
 
     override fun initView() {
 
 
-        binding.buttonSuccess.setOnClickListener {
+        /*binding.buttonSuccess.setOnClickListener {
             ToastyUtils.showSuccess("测试成功吐司")
         }
         binding.buttonError.setOnClickListener {
@@ -40,11 +41,19 @@ class KotlinTestActivity : BaseMvpActivity<TestContract.View,TestContract.Presen
         }
         binding.buttonWarning.setOnClickListener {
             ToastyUtils.showWarning("测试警告吐司")
-        }
+        }*/
+
+        binding.buttonSuccess.setOnClickListener(this)
+        binding.buttonWarning.setOnClickListener(this)
+        binding.buttonNormal.setOnClickListener(this)
+        binding.buttonInfo.setOnClickListener(this)
+        binding.buttonError.setOnClickListener(this)
+
     }
 
     override fun initData() {
         presenter.getData()
+
     }
 
     override fun getDataSuccess(msg: String?) {
@@ -52,4 +61,15 @@ class KotlinTestActivity : BaseMvpActivity<TestContract.View,TestContract.Presen
     }
 
     override var presenter: TestContract.Presenter = TestPresenter();
+    override fun onClick(v: View?) {
+        if (v == null )return
+        when(v.id){
+            R.id.button_success ->  ToastyUtils.showSuccess("展示 success 级别吐司")
+            R.id.button_error ->  ToastyUtils.showError("展示 error 级别吐司")
+            R.id.button_info -> ToastyUtils.showInfo("展示 info 级别吐司")
+            R.id.button_normal -> ToastyUtils.showNormal("展示 normal 级别吐司")
+            R.id.button_warning -> ToastyUtils.showWarning("展示 warning 级别吐司")
+        }
+    }
+
 }

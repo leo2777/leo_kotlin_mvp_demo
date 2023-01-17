@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.viewbinding.ViewBinding
+import es.dmoral.toasty.Toasty
 import leo.study.lib_base.R
 import leo.study.lib_base.base.BaseActivity
 
-abstract class BaseMvpActivity<V : ITopView, P : ITopPresenter> : BaseActivity(), IView<P> {
+abstract class BaseMvpActivity<T:ViewBinding,V : ITopView, P : ITopPresenter> : BaseActivity<T>(), IView<P> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +54,10 @@ abstract class BaseMvpActivity<V : ITopView, P : ITopPresenter> : BaseActivity()
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show()
+        Toasty.info(getContext(),message,Toast.LENGTH_SHORT).show()
     }
 
-    override fun showToast(messageId: Int) {
-        Toast.makeText(getContext(), messageId, Toast.LENGTH_SHORT).show()
+    override fun showToast(@StringRes messageId: Int) {
+        Toasty.info(getContext(),messageId,Toast.LENGTH_SHORT).show()
     }
 }

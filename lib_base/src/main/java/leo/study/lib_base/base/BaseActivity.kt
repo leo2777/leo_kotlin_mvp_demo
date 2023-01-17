@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
@@ -13,6 +14,7 @@ import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+import androidx.viewbinding.ViewBinding
 import leo.study.lib_base.R
 import leo.study.lib_base.utils.ActivityUtils
 import leo.study.lib_base.utils.ProgressDialogUtils
@@ -31,14 +33,24 @@ import kotlin.properties.Delegates
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
+
+    private lateinit var _binding:T
+    protected val binding get() = _binding
+
     open var context: Context by Delegates.notNull()
 
-    open var progressDialog:ProgressDialogUtils?=null
+    open var progressDialog: ProgressDialogUtils? = null
     open fun onSetContentViewNext(savedInstanceState: Bundle?) {}
 
 
-    abstract fun getContentView(): View
+    /**
+     * 绑定控件
+     *
+     * @return viewBinding
+     */
+    abstract fun getViewBinding():T
+
 
     abstract fun initView()
     abstract fun initData()
@@ -49,7 +61,8 @@ abstract class BaseActivity : AppCompatActivity() {
         //强制竖屏
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         context = this
-        setContentView(getContentView())
+        _binding = getViewBinding()
+        setContentView(_binding.root)
 //        setStatesBar()
         initView()
         progressDialog = ProgressDialogUtils(this, R.style.commonDialogStyle)
@@ -69,7 +82,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
 
-
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (ev != null && ev.action == MotionEvent.ACTION_UP) {
             val v = currentFocus
@@ -84,7 +96,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     // 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘
     private fun hideKeyboard(view: View?, event: MotionEvent?): Boolean {
-        if (view != null && event !=null && view is EditText) {
+        if (view != null && event != null && view is EditText) {
 
             val location = intArrayOf(0, 0)
             view.getLocationInWindow(location)

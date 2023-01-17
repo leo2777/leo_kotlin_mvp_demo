@@ -2,6 +2,7 @@ package leo.study.kotlin_mvp_demo.ui.test;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewbinding.ViewBinding;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,31 +14,21 @@ import org.jetbrains.annotations.Nullable;
 
 import leo.study.kotlin_mvp_demo.R;
 import leo.study.kotlin_mvp_demo.databinding.ActivityJavaTestBinding;
+import leo.study.kotlin_mvp_demo.utils.ToastyUtils;
+import leo.study.lib_base.image.ImageLoaderHelper;
 import leo.study.lib_base.mvp.BaseMvpActivity;
 import leo.study.lib_base.mvp.ITopPresenter;
 
-public class JavaTestActivity extends BaseMvpActivity<TestContract.View,TestContract.Presenter> implements TestContract.View {
+public class JavaTestActivity extends BaseMvpActivity<ActivityJavaTestBinding,TestContract.View,TestContract.Presenter> implements TestContract.View {
 
     private TestPresenter presenter;
 
-    private ActivityJavaTestBinding javaTestBinding;
 
-
-    @NonNull
-    @Override
-    public View getContentView() {
-        javaTestBinding = ActivityJavaTestBinding.inflate(getLayoutInflater());
-        return javaTestBinding.getRoot();
-    }
 
     @Override
     public void initView() {
 
-        javaTestBinding.btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+        getBinding().btnTest.setOnClickListener(view -> ToastyUtils.INSTANCE.showInfo("测试点击事件"));
 
     }
 
@@ -47,6 +38,8 @@ public class JavaTestActivity extends BaseMvpActivity<TestContract.View,TestCont
         presenter = new TestPresenter();
         presenter.getData();
         showLoading(false);
+
+        ImageLoaderHelper.Companion.getInstance().loadImage(getBinding().btnTest,"");
     }
 
     @NonNull
@@ -61,7 +54,13 @@ public class JavaTestActivity extends BaseMvpActivity<TestContract.View,TestCont
 
     @Override
     public void getDataSuccess(@Nullable String msg) {
-        javaTestBinding.tvTest.setText(msg);
+        getBinding().tvTest.setText(msg);
         Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
+    }
+
+    @NonNull
+    @Override
+    public ActivityJavaTestBinding getViewBinding() {
+        return ActivityJavaTestBinding.inflate(getLayoutInflater());
     }
 }

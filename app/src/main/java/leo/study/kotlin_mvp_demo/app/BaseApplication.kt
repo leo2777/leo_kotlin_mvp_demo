@@ -2,12 +2,16 @@ package leo.study.kotlin_mvp_demo.app
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.Gravity
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import es.dmoral.toasty.Toasty
+import leo.study.kotlin_mvp_demo.common.GlideLoaderProcessor
 import leo.study.kotlin_mvp_demo.common.LoggerAdapter
+import leo.study.lib_base.image.ImageLoaderHelper
+import leo.study.lib_base.image.ImageOptions
 
 
 /**
@@ -59,6 +63,8 @@ class BaseApplication : Application() {
         initLogger()
         //初始化toasty
         initToasty()
+        //初始化 图片加载
+        initImage()
 
 
     }
@@ -94,6 +100,29 @@ class BaseApplication : Application() {
 //            .supportDarkTheme(boolean supportDarkTheme) // optional (whether to support dark theme or not)
 //            .setRTL(boolean isRTL) // optional (icon is on the right)
             .apply(); // required
+    }
+
+
+    /**
+     * 初始化图片加载代理
+     *
+     */
+    private fun initImage() {
+        //设置配置类
+        val imageOptions : ImageOptions = ImageOptions(
+            placeholderResId = 0,
+            errorResId = 0,
+            isCenterCrop = false,
+            isCenterInside = false,
+            config = Bitmap.Config.RGB_565,
+            targetWidth = 0,
+            targetHeight = 0,
+            context = context
+        )
+        //设置代理类
+        ImageLoaderHelper.instance.setImgLoaderProxy(GlideLoaderProcessor(imageOptions))
+
+
     }
 
 

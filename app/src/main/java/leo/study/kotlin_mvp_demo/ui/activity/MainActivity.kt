@@ -18,7 +18,7 @@ import leo.study.kotlin_mvp_demo.databinding.ActivityMainBinding
 import leo.study.lib_base.base.BaseActivity
 
 //首页
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     //地步选择栏按钮id 集合
     private val appBarConfiguration = AppBarConfiguration(
@@ -31,16 +31,9 @@ class MainActivity : BaseActivity() {
         )
     )
 
-    private lateinit var binding: ActivityMainBinding
-
-
-    override fun getContentView(): View {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        return binding.root
+    override fun getViewBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
     }
-
-
-
 
     override fun initView() {
 
