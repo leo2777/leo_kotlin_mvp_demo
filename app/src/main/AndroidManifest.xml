@@ -4,6 +4,7 @@
     package="leo.study.kotlin_mvp_demo">
 
     <application
+        android:name=".app.BaseApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

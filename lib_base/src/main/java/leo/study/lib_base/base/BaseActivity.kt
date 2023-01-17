@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import leo.study.lib_base.R
 import leo.study.lib_base.utils.ActivityUtils
 import leo.study.lib_base.utils.ProgressDialogUtils
@@ -36,8 +37,9 @@ abstract class BaseActivity : AppCompatActivity() {
     open var progressDialog:ProgressDialogUtils?=null
     open fun onSetContentViewNext(savedInstanceState: Bundle?) {}
 
-    @LayoutRes
-    abstract fun getContentView(): Int
+
+    abstract fun getContentView(): View
+
     abstract fun initView()
     abstract fun initData()
 

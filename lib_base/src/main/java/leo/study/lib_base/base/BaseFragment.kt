@@ -49,6 +49,7 @@ abstract class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         savedStanceState(savedInstanceState)
         initView(view)
+        
     }
 
     override fun onResume() {

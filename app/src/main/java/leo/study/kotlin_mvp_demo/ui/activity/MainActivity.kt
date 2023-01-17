@@ -1,13 +1,20 @@
 package leo.study.kotlin_mvp_demo.ui.activity
 
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.navigation.NavigationBarView
 import leo.study.kotlin_mvp_demo.R
+import leo.study.kotlin_mvp_demo.databinding.ActivityMainBinding
 import leo.study.lib_base.base.BaseActivity
 
 //首页
@@ -24,16 +31,27 @@ class MainActivity : BaseActivity() {
         )
     )
 
+    private lateinit var binding: ActivityMainBinding
 
-    override fun getContentView(): Int {
-        return R.layout.activity_main
+
+    override fun getContentView(): View {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        return binding.root
     }
 
+
+
+
     override fun initView() {
+
+
         //设置底部选择栏
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         setupActionBarWithNavController(navController, appBarConfiguration)
-        nav_view.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
+
+
+
     }
 
     override fun initData() {

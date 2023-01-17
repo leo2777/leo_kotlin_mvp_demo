@@ -19,7 +19,7 @@ import java.util.*
  */
 object ActivityUtils {
 
-    private val TAG = "ActivityUtils"
+    private const val TAG = "ActivityUtils"
     private val activityStack: Stack<Activity> = Stack()
 
     /**

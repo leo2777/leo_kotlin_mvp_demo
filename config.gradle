@@ -42,6 +42,10 @@ ext {
 
             //gif
             gifView              : "1.2.25",
+            //logger
+            logger               : "2.2.0",
+            //toasty
+            toasty               : "1.5.2",
     ]
 
     /**
@@ -75,6 +79,9 @@ ext {
             rxBus                : "com.blankj:rxbus:$version.rxBus",
 
             gifView              : "pl.droidsonroids.gif:android-gif-drawable:$version.gifView",
+
+            logger               : "com.orhanobut:logger:$version.logger",
+            toasty               : "com.github.GrenderG:Toasty:$version.toasty",
     ]
 
 }

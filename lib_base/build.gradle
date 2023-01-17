@@ -53,6 +53,12 @@ dependencies {
     //gif加载框架
     api rootProject.ext.dependencies.gifView
 
+    //logger 日志管理
+    api rootProject.ext.dependencies.logger
+
+    //toasty 颜色吐司
+    api rootProject.ext.dependencies.toasty
+
 
     testImplementation rootProject.ext.dependencies.junit
     androidTestImplementation rootProject.ext.dependencies.testJunit
