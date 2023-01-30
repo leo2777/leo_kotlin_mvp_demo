@@ -49,20 +49,20 @@ interface ImageProxy {
      */
     fun loadGif(view: View?, url: String?): ImageProxy
 
-    /**
-     * 加载自定义高宽图片
-     * @param [view] 显示的view
-     * @param [url] 图片地址
-     * @param [width] 图片宽度 px
-     * @param [height] 图片高度 px
-     * @return 当前代理类
-     */
-    fun loadTargetWidthAndHeight(
-        view: View?,
-        url: String?,
-        width: Int,
-        height: Int,
-    ): ImageProxy
+//    /**
+//     * 加载自定义高宽图片
+//     * @param [view] 显示的view
+//     * @param [url] 图片地址
+//     * @param [width] 图片宽度 px
+//     * @param [height] 图片高度 px
+//     * @return 当前代理类
+//     */
+//    fun loadTargetWidthAndHeight(
+//        view: View?,
+//        url: String?,
+//        width: Int,
+//        height: Int,
+//    ): ImageProxy
 
 
     /**

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.orhanobut.logger.Logger
 import leo.study.kotlin_mvp_demo.databinding.FragmentHomeBinding
+import leo.study.kotlin_mvp_demo.ui.test.GlideTestActivity
 import leo.study.kotlin_mvp_demo.ui.test.JavaTestActivity
 import leo.study.kotlin_mvp_demo.ui.test.KotlinTestActivity
 
@@ -34,7 +35,7 @@ class HomeFragment : Fragment() {
         Logger.t("333333").d(this.toString())
 
         binding.btnHomeFragmentJumpTest.setOnClickListener {
-            val intent = Intent(context, KotlinTestActivity::class.java)
+            val intent = Intent(context, GlideTestActivity::class.java)
             startActivity(intent)
         }
     }

@@ -8,6 +8,7 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import es.dmoral.toasty.Toasty
+import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.common.GlideLoaderProcessor
 import leo.study.kotlin_mvp_demo.common.LoggerAdapter
 import leo.study.lib_base.image.ImageLoaderHelper
@@ -109,16 +110,15 @@ class BaseApplication : Application() {
      */
     private fun initImage() {
         //设置配置类
-        val imageOptions : ImageOptions = ImageOptions(
-            placeholderResId = 0,
-            errorResId = 0,
-            isCenterCrop = false,
-            isCenterInside = false,
-            config = Bitmap.Config.RGB_565,
-            targetWidth = 0,
-            targetHeight = 0,
-            context = context
-        )
+        val imageOptions = ImageOptions.Builder(this)
+            .placeholderResId(leo.study.lib_base.R.drawable.icon_default_image_loading) //预览图片
+            .errorResId(leo.study.lib_base.R.drawable.icon_default_image_error)  //错误图片
+//            .width(300)   //目标宽度
+//            .height(300)  //目标高度
+            .isCenterCrop(false)  //是否居中裁剪
+            .isCenterInside(false) //是否是显示所有居中
+//            .config(Bitmap.Config.ARGB_8888) //Bitmap类型
+            .build()
         //设置代理类
         ImageLoaderHelper.instance.setImgLoaderProxy(GlideLoaderProcessor(imageOptions))
 

@@ -1,6 +1,15 @@
 package leo.study.kotlin_mvp_demo.common
 
+import android.graphics.drawable.Drawable
+import android.os.Looper
 import android.view.View
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import leo.study.lib_base.image.ImageLoaderCallback
 import leo.study.lib_base.image.ImageOptions
@@ -20,14 +29,13 @@ import java.io.File
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
-//todo: 未完成 需要优化实现
 open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
 
-    private var proxy : ImageProxy ?=null;
+    private var proxy: ImageProxy? = null;
 
-    private val options:ImageOptions;
+    private val options: ImageOptions;
 
-    private val requestOptions:RequestOptions = RequestOptions()
+    private val requestOptions: RequestOptions = RequestOptions()
 
 
     init {
@@ -58,22 +66,9 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
     }
 
 
-    /**
-     * 初始化
-     *
-     * @param loaderProxy 代理类
-     * @return 返回本身
-     */
-    private fun init(loaderProxy: ImageProxy): ImageProxy {
-        proxy = loaderProxy
-        return proxy!!
-    }
-
     private fun obtain(): ImageProxy {
-        return GlideLoaderProcessor(options).init(proxy!!)
+        return this
     }
-
-
 
 
     /**
@@ -83,6 +78,15 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前的代理类
      */
     override fun loadImage(view: View?, path: String?): ImageProxy {
+        if (view is ImageView) {
+            options.context?.let {
+                Glide
+                    .with(it)
+                    .setDefaultRequestOptions(requestOptions)
+                    .load(path)
+                    .into(view)
+            }
+        }
         return obtain()
     }
 
@@ -93,7 +97,17 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前的代理类
      */
     override fun loadImage(view: View?, drawable: Int): ImageProxy {
-        TODO("Not yet implemented")
+        if (view is ImageView) {
+            options.context?.let {
+                Glide
+                    .with(it)
+                    .setDefaultRequestOptions(requestOptions)
+                    .asDrawable()
+                    .load(drawable)
+                    .into(view)
+            }
+        }
+        return obtain()
     }
 
     /**
@@ -103,7 +117,17 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前的代理类
      */
     override fun loadImage(view: View?, file: File?): ImageProxy {
-        TODO("Not yet implemented")
+        if (view is ImageView) {
+            options.context?.let {
+                Glide
+                    .with(it)
+                    .setDefaultRequestOptions(requestOptions)
+                    .asFile()
+                    .load(file)
+                    .into(view)
+            }
+        }
+        return obtain()
     }
 
     /**
@@ -113,25 +137,36 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前代理类
      */
     override fun loadGif(view: View?, url: String?): ImageProxy {
-        TODO("Not yet implemented")
+        if (view is ImageView) {
+            options.context?.let {
+                Glide
+                    .with(it)
+                    .setDefaultRequestOptions(requestOptions)
+                    .asGif()
+                    .load(url)
+                    .into(view)
+            }
+        }
+
+        return obtain()
     }
 
-    /**
-     * 加载自定义高宽图片
-     * @param [view] 显示的view
-     * @param [url] 图片地址
-     * @param [width] 图片宽度 px
-     * @param [height] 图片高度 px
-     * @return 当前代理类
-     */
-    override fun loadTargetWidthAndHeight(
-        view: View?,
-        url: String?,
-        width: Int,
-        height: Int,
-    ): ImageProxy {
-        TODO("Not yet implemented")
-    }
+//    /**
+//     * 加载自定义高宽图片
+//     * @param [view] 显示的view
+//     * @param [url] 图片地址
+//     * @param [width] 图片宽度 px
+//     * @param [height] 图片高度 px
+//     * @return 当前代理类
+//     */
+//    override fun loadTargetWidthAndHeight(
+//        view: View?,
+//        url: String?,
+//        width: Int,
+//        height: Int,
+//    ): ImageProxy {
+//        TODO("Not yet implemented")
+//    }
 
     /**
      * 加载缩略图
@@ -141,7 +176,17 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前代理类
      */
     override fun loadThumb(view: View?, url: String?, scan: Float): ImageProxy {
-        TODO("Not yet implemented")
+        if (view is ImageView) {
+            options.context?.let {
+                Glide
+                    .with(it)
+                    .setDefaultRequestOptions(requestOptions)
+                    .load(url)
+                    .thumbnail(scan)
+                    .into(view)
+            }
+        }
+        return obtain()
     }
 
     /**
@@ -151,7 +196,17 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前代理类
      */
     override fun loadCircleImage(view: View?, url: String?): ImageProxy {
-        TODO("Not yet implemented")
+        if (view is ImageView) {
+            options.context?.let {
+                Glide
+                    .with(it)
+                    .setDefaultRequestOptions(requestOptions)
+                    .applyDefaultRequestOptions(RequestOptions.bitmapTransform(CircleCrop()))
+                    .load(url)
+                    .into(view)
+            }
+        }
+        return obtain()
     }
 
     /**
@@ -162,7 +217,23 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前代理类
      */
     override fun loadRoundImage(view: View?, url: String?, shapeValue: Int): ImageProxy {
-        TODO("Not yet implemented")
+        if (view is ImageView) {
+            options.context?.let {
+                Glide
+                    .with(it)
+                    .setDefaultRequestOptions(requestOptions)
+                    .applyDefaultRequestOptions(
+                        RequestOptions.bitmapTransform(
+                            RoundedCorners(
+                                shapeValue
+                            )
+                        )
+                    )
+                    .load(url)
+                    .into(view)
+            }
+        }
+        return obtain()
     }
 
     /**
@@ -173,7 +244,37 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前代理类
      */
     override fun getDrawable(url: String?, loaderCallback: ImageLoaderCallback?): ImageProxy {
-        TODO("Not yet implemented")
+        Glide
+            .with(options.context!!)
+            .load(url)
+            .listener(object : RequestListener<Drawable?> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable?>?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    loaderCallback!!.onFail("图片下载失败！")
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable?>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    if (resource != null) {
+                        loaderCallback!!.onSuccess(resource, "图片下载成功！")
+                        return false
+                    }
+                    loaderCallback!!.onFail("图片下载失败！")
+                    return false
+                }
+            })
+            .submit()
+        return obtain()
     }
 
     /**
@@ -182,7 +283,7 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 返回当前
      */
     override fun setImgLoaderOptions(options: ImageOptions?): ImageProxy {
-        TODO("Not yet implemented")
+        return proxy!!.setImgLoaderOptions(options)
     }
 
     /**
@@ -190,7 +291,17 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前代理类
      */
     override fun clearMemoryCache(): ImageProxy {
-        TODO("Not yet implemented")
+        try {
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                options.context?.let {
+                    Glide.get(it)
+                        .clearMemory()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return obtain()
     }
 
     /**
@@ -198,6 +309,21 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
      * @return 当前代理类
      */
     override fun clearDiskCache(): ImageProxy {
-        TODO("Not yet implemented")
+        try {
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                Thread {
+                    options.context?.let { Glide.get(it).clearDiskCache() }
+                }.start()
+            } else {
+                options.context?.let {
+                    Glide.get(it)
+                        .clearDiskCache()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return obtain()
     }
+
 }

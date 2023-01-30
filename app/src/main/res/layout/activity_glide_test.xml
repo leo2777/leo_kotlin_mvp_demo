@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ui.test.GlideTestActivity">
+
+    <ImageView
+        android:id="@+id/img_glide_test"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_glide_test_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示网络图片"/>
+
+    <Button
+        android:id="@+id/btn_glide_test_drawable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示drawable图片"/>
+
+    <Button
+        android:id="@+id/btn_glide_test_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示圆形图片"/>
+
+    <Button
+        android:id="@+id/btn_glide_test_round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示圆角图片"/>
+
+</LinearLayout>

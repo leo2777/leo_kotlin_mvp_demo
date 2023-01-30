@@ -92,23 +92,23 @@ class ImageLoaderHelper private constructor() : ImageProxy {
         return proxy?.loadImage(view, url)!!
     }
 
-    /**
-     * 加载自定义高宽图片
-     * @param [view] 显示的view
-     * @param [url] 图片地址
-     * @param [width] 图片宽度 px
-     * @param [height] 图片高度 px
-     * @return 当前代理类
-     */
-    override fun loadTargetWidthAndHeight(
-        view: View?,
-        url: String?,
-        width: Int,
-        height: Int,
-    ): ImageProxy {
-        judgeProxyNullable()
-        return proxy?.loadTargetWidthAndHeight(view, url, width, height)!!
-    }
+//    /**
+//     * 加载自定义高宽图片
+//     * @param [view] 显示的view
+//     * @param [url] 图片地址
+//     * @param [width] 图片宽度 px
+//     * @param [height] 图片高度 px
+//     * @return 当前代理类
+//     */
+//    override fun loadTargetWidthAndHeight(
+//        view: View?,
+//        url: String?,
+//        width: Int,
+//        height: Int,
+//    ): ImageProxy {
+//        judgeProxyNullable()
+//        return proxy?.loadTargetWidthAndHeight(view, url, width, height)!!
+//    }
 
     /**
      * 加载缩略图
