@@ -21,14 +21,14 @@ abstract class BaseMvpActivity<T:ViewBinding,V : ITopView, P : ITopPresenter> : 
         initEnd()
     }
 
-    override fun getContext() = this
+    override fun getCtx() = this
 
 
     override fun showLoading(isTimer: Boolean) {
         if (isTimer)
-            progressDialog?.showProgressTimeDialog()
+            progressDialog?.showProgressMsgTimeDialog("")
         else
-            progressDialog?.showProgressDialog()
+            progressDialog?.showProgressMsgDialog("")
     }
 
     override fun showLoading(msg: String, isTimer: Boolean) {
@@ -54,10 +54,10 @@ abstract class BaseMvpActivity<T:ViewBinding,V : ITopView, P : ITopPresenter> : 
     }
 
     override fun showToast(message: String) {
-        Toasty.info(getContext(),message,Toast.LENGTH_SHORT).show()
+        Toasty.info(getCtx(),message,Toast.LENGTH_SHORT).show()
     }
 
     override fun showToast(@StringRes messageId: Int) {
-        Toasty.info(getContext(),messageId,Toast.LENGTH_SHORT).show()
+        Toasty.info(getCtx(),messageId,Toast.LENGTH_SHORT).show()
     }
 }

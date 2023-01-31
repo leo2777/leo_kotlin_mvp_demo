@@ -2,11 +2,13 @@ package leo.study.kotlin_mvp_demo.app
 
 import android.app.Application
 import android.content.Context
-import android.graphics.Bitmap
 import android.view.Gravity
-import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.BezierRadarHeader
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import es.dmoral.toasty.Toasty
 import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.common.GlideLoaderProcessor
@@ -66,7 +68,8 @@ class BaseApplication : Application() {
         initToasty()
         //初始化 图片加载
         initImage()
-
+        //初始化 智能刷新
+        initSmartRefresh()
 
     }
 
@@ -116,13 +119,30 @@ class BaseApplication : Application() {
 //            .width(300)   //目标宽度
 //            .height(300)  //目标高度
             .isCenterCrop(false)  //是否居中裁剪
-            .isCenterInside(false) //是否是显示所有居中
+            .isCenterInside(true) //是否是显示所有居中
 //            .config(Bitmap.Config.ARGB_8888) //Bitmap类型
             .build()
         //设置代理类
         ImageLoaderHelper.instance.setImgLoaderProxy(GlideLoaderProcessor(imageOptions))
 
 
+    }
+
+    /**
+     * 初始化智能刷新控件，设置默认头部尾部
+     *
+     */
+    private fun initSmartRefresh(){
+        //设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+            layout.setPrimaryColorsId(leo.study.lib_base.R.color.color_theme, android.R.color.white) //全局设置主题颜色
+            BezierRadarHeader(context) //.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+        }
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> //指定为经典Footer，默认是 BallPulseFooter
+            layout.setPrimaryColorsId(leo.study.lib_base.R.color.color_theme, android.R.color.white) //全局设置主题颜色
+            ClassicsFooter(context).setDrawableSize(20f)
+        }
     }
 
 

@@ -47,18 +47,17 @@ open class ProgressDialogUtils(context: Context, style: Int) {
     /**
      * 显示加载框（无文字）
      */
-    open fun showProgressDialog() {
+    private fun showProgressDialog() {
         if (!dialog.isShowing) {
             tvLoadingDesc.visibility = View.VISIBLE
             dialog.show()
-            Log.e("333333", "showProgressDialog: 显示" )
         }
     }
 
     /**
      * 显示显示加载框（无文字）
      */
-    open fun showProgressTimeDialog() {
+    private fun showProgressTimeDialog() {
         if (!dialog.isShowing) {
             tvLoadingDesc.visibility = View.VISIBLE
             dialog.show()
@@ -106,7 +105,6 @@ open class ProgressDialogUtils(context: Context, style: Int) {
      */
     open fun dismissProgressDialog(){
         if (dialog.isShowing){
-            Log.e("333333", "showProgressDialog: 关闭" )
             dialog.dismiss()
         }
     }

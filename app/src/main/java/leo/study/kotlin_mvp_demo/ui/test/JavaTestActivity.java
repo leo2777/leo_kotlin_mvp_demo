@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+
 import org.jetbrains.annotations.Nullable;
 
 import leo.study.kotlin_mvp_demo.R;
@@ -40,6 +44,19 @@ public class JavaTestActivity extends BaseMvpActivity<ActivityJavaTestBinding,Te
         showLoading(false);
 
         ImageLoaderHelper.Companion.getInstance().loadImage(getBinding().btnTest,"");
+
+        SmartRefreshLayout smartRefreshLayout = new SmartRefreshLayout(this);
+        smartRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+            }
+        });
     }
 
     @NonNull

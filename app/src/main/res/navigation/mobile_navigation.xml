@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="leo.study.kotlin_mvp_demo.ui.fragment.HomeFragment"
+        android:name="leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 

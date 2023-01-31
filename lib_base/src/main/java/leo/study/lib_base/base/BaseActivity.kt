@@ -1,14 +1,12 @@
 package leo.study.lib_base.base
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.WindowManager
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.LayoutRes
@@ -63,7 +61,9 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         context = this
         _binding = getViewBinding()
         setContentView(_binding.root)
-//        setStatesBar()
+        //隐藏actionbar
+        supportActionBar?.hide()
+        setStatesBar()
         initView()
         progressDialog = ProgressDialogUtils(this, R.style.commonDialogStyle)
         onSetContentViewNext(savedInstanceState)
@@ -72,7 +72,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     }
 
     /**
-     * 设置状态栏
+     * 设置状态栏 actionBar
      */
     private fun setStatesBar() {
     }

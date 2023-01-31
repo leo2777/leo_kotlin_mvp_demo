@@ -2,6 +2,7 @@ package leo.study.kotlin_mvp_demo.net
 
 import android.widget.Toast
 import com.google.gson.JsonParseException
+import com.orhanobut.logger.Logger
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -44,6 +45,7 @@ fun <T : Any> Observable<T>.leoSubscribe(
             }
             override fun onNext(t: T) {
                 val bean = t as BaseRequest<*>
+                Logger.e(bean.toString())
                 when(bean.errorCode){
                     CodeStatus.SUCCESS_CODE -> {
                         onSuccess.invoke(t)

@@ -16,6 +16,6 @@ package leo.study.kotlin_mvp_demo.constants
 object Constants {
 
     //主请求地址
-    const val mainUrl : String = "https://www.wanandroid.com"
+    const val mainUrl : String = "https://www.wanandroid.com/"
 
 }

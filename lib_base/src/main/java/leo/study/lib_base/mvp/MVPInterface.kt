@@ -37,7 +37,7 @@ interface ITopView : LifecycleOwner {
      *
      * @return context
      */
-    fun getContext(): Context?
+    fun getCtx(): Context?
 
     /**
      * 初始化完毕，
@@ -137,7 +137,7 @@ interface IPresenter<V : ITopView, M : ITopModel> : ITopPresenter {
     var view: V?
     var model: M?
 
-    fun getContext() = view?.getContext()
+    fun getContext() = view?.getCtx()
 
     @Suppress("UNCHECKED_CAST")
     override fun attachView(view: ITopView) {

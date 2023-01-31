@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import leo.study.lib_base.R
+import leo.study.lib_base.utils.ProgressDialogUtils
 
 
 /**
@@ -29,6 +31,8 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     protected val binding get() = _binding!!
 
 
+
+    private var progressDialog: ProgressDialogUtils? = null
     open var mContext: Context? = null
 
     private var isLazyLoad = false
@@ -39,9 +43,10 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
      *
      * @param [inflater] 布局
      * @param [container] 父类
-     * @return [ViewBinding]
+     * @return  绑定
      */
     protected abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): T
+    protected abstract fun initView(view: View)
     protected abstract fun lazyLoad()
 
 
@@ -60,6 +65,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         savedStanceState(savedInstanceState)
         mContext = context
         initView(view)
+        progressDialog = context?.let { ProgressDialogUtils(it, R.style.commonDialogStyle) }
 
     }
 
@@ -72,9 +78,25 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     }
 
-    protected abstract fun initView(view: View)
 
     open fun savedStanceState(savedInstanceState: Bundle?) {}
+
+
+    fun showProgressDialog(text: String) {
+        progressDialog?.showProgressMsgDialog(text)
+    }
+
+    fun showProgressDialogTimeOut(text: String){
+        progressDialog?.showProgressMsgTimeDialog(text)
+    }
+
+
+    fun dismissProgressDialog() {
+        progressDialog?.dismissProgressDialog()
+    }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

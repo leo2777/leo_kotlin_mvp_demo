@@ -13,9 +13,6 @@ import leo.study.lib_base.mvp.BaseMvpActivity
 class KotlinTestActivity: BaseMvpActivity<ActivityKotlinTestBinding,TestContract.View,TestContract.Presenter>(),TestContract.View,OnClickListener {
 
 
-    override fun getContext(): BaseMvpActivity<ActivityKotlinTestBinding, TestContract.View, TestContract.Presenter> {
-        return this
-    }
 
     override fun getViewBinding(): ActivityKotlinTestBinding {
         return ActivityKotlinTestBinding.inflate(layoutInflater)

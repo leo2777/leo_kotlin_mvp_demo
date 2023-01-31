@@ -17,5 +17,5 @@ package leo.study.kotlin_mvp_demo.common
 data class BaseRequest<T>(
     var errorCode: Int,
     var errorMsg: String,
-    var data: T
+    var data : T
 )

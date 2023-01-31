@@ -12,7 +12,7 @@ class GlideTestActivity : AppCompatActivity(),OnClickListener {
 
     private lateinit var binding : ActivityGlideTestBinding
 
-    private val webPath = "http://cn.bing.com/az/hprichbg/rb/TOAD_ZH-CN7336795473_1920x1080.jpg"
+    private val webPath = "https://img.mp.itc.cn/upload/20161216/42bff90fa96141618885594b4fe176ff_th.jpg"
     private val webGif = "https://img.zcool.cn/community/01639c586c91bba801219c77f6efc8.gif"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +51,7 @@ class GlideTestActivity : AppCompatActivity(),OnClickListener {
                 ImageLoaderHelper.instance.loadCircleImage(binding.imgGlideTest,webPath)
             }
             R.id.btn_glide_test_round -> {
-                ImageLoaderHelper.instance.loadRoundImage(binding.imgGlideTest,webPath,20)
+                ImageLoaderHelper.instance.loadRoundImage(binding.imgGlideTest,webPath,50)
             }
 
         }

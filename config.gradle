@@ -46,6 +46,10 @@ ext {
             logger               : "2.2.0",
             //toasty
             toasty               : "1.5.2",
+            //banner
+            banner               : "2.2.2",
+            //智能刷新控件（smartRefreshLayout）
+            smart_refresh        : "2.0.5",
     ]
 
     /**
@@ -53,35 +57,48 @@ ext {
      */
     dependencies = [
 
-            coreKtx              : "androidx.core:core-ktx:$version.coreKtx",
-            appcompat            : "androidx.appcompat:appcompat:$version.appcompat",
-            material             : "com.google.android.material:material:$version.material",
-            constraintLayout     : "androidx.constraintlayout:constraintlayout:$version.constraintLayout",
-            navigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:$version.navigationFragmentKtx",
-            navigationUiKtx      : "androidx.navigation:navigation-ui-ktx:$version.navigationUiKtx",
-            junit                : "junit:junit:$version.junit",
-            testJunit            : "androidx.test.ext:junit:$version.testJunit",
-            espresso             : "androidx.test.espresso:espresso-core:$version.espresso",
+            coreKtx                    : "androidx.core:core-ktx:$version.coreKtx",
+            appcompat                  : "androidx.appcompat:appcompat:$version.appcompat",
+            material                   : "com.google.android.material:material:$version.material",
+            constraintLayout           : "androidx.constraintlayout:constraintlayout:$version.constraintLayout",
+            navigationFragmentKtx      : "androidx.navigation:navigation-fragment-ktx:$version.navigationFragmentKtx",
+            navigationUiKtx            : "androidx.navigation:navigation-ui-ktx:$version.navigationUiKtx",
+            junit                      : "junit:junit:$version.junit",
+            testJunit                  : "androidx.test.ext:junit:$version.testJunit",
+            espresso                   : "androidx.test.espresso:espresso-core:$version.espresso",
 
             //网络请求
-            retrofit             : "com.squareup.retrofit2:retrofit:$version.retrofit",
-            retrofitGson         : "com.squareup.retrofit2:converter-gson:$version.retrofit",
-            retrofitRxJava       : "com.squareup.retrofit2:adapter-rxjava2:$version.retrofit",
-            okHttp               : "com.squareup.okhttp3:okhttp:$version.okHttp",
-            okHttpLogging        : "com.squareup.okhttp3:logging-interceptor:$version.okHTtpLogging",
-            glide                : "com.github.bumptech.glide:glide:$version.glide",
-            glideTransformations : "jp.wasabeef:glide-transformations:$version.glideTransformations",
-            gson                 : "com.google.code.gson:gson:$version.gson",
+            retrofit                   : "com.squareup.retrofit2:retrofit:$version.retrofit",
+            retrofitGson               : "com.squareup.retrofit2:converter-gson:$version.retrofit",
+            retrofitRxJava             : "com.squareup.retrofit2:adapter-rxjava2:$version.retrofit",
+            okHttp                     : "com.squareup.okhttp3:okhttp:$version.okHttp",
+            okHttpLogging              : "com.squareup.okhttp3:logging-interceptor:$version.okHTtpLogging",
+            glide                      : "com.github.bumptech.glide:glide:$version.glide",
+            glideTransformations       : "jp.wasabeef:glide-transformations:$version.glideTransformations",
+            gson                       : "com.google.code.gson:gson:$version.gson",
 
             //rx
-            rxAndroid            : "io.reactivex.rxjava2:rxandroid:$version.rxAndroid",
-            rxJava               : "io.reactivex.rxjava2:rxjava:$version.rxJava",
-            rxBus                : "com.blankj:rxbus:$version.rxBus",
+            rxAndroid                  : "io.reactivex.rxjava2:rxandroid:$version.rxAndroid",
+            rxJava                     : "io.reactivex.rxjava2:rxjava:$version.rxJava",
+            rxBus                      : "com.blankj:rxbus:$version.rxBus",
 
-            gifView              : "pl.droidsonroids.gif:android-gif-drawable:$version.gifView",
+            gifView                    : "pl.droidsonroids.gif:android-gif-drawable:$version.gifView",
 
-            logger               : "com.orhanobut:logger:$version.logger",
-            toasty               : "com.github.GrenderG:Toasty:$version.toasty",
+            //log
+            logger                     : "com.orhanobut:logger:$version.logger",
+            //吐司
+            toasty                     : "com.github.GrenderG:Toasty:$version.toasty",
+            //轮播图 banner
+            banner                     : "io.github.youth5201314:banner:$version.banner",
+
+            //智能刷新控件（smartRefreshLayout）
+            smart_refresh_kernel       : "io.github.scwang90:refresh-layout-kernel:$version.smart_refresh",
+            smart_refresh_head_classics: "io.github.scwang90:refresh-header-classics:$version.smart_refresh",
+            smart_refresh_head_radar   : "io.github.scwang90:refresh-header-radar:$version.smart_refresh",
+            smart_refresh_head_falsify : "io.github.scwang90:refresh-header-falsify:$version.smart_refresh",
+            smart_refresh_head_material: "io.github.scwang90:refresh-header-material:$version.smart_refresh",
+            smart_refresh_food_ball    : "io.github.scwang90:refresh-footer-ball:$version.smart_refresh",
+            smart_refresh_food_classics: "io.github.scwang90:refresh-footer-classics:$version.smart_refresh",
     ]
 
 }

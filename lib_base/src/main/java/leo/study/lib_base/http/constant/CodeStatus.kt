@@ -14,7 +14,7 @@ package leo.study.lib_base.http.constant
  * ***********************************************************************
  */
 object CodeStatus {
-    const val SUCCESS_CODE = 100
+    const val SUCCESS_CODE = 0
     const val FAIL_CODE = 400
 
 
