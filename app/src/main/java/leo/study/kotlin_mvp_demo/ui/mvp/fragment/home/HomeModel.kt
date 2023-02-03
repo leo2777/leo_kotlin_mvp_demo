@@ -1,8 +1,10 @@
 package leo.study.kotlin_mvp_demo.ui.mvp.fragment.home
 
 import io.reactivex.Observable
+import leo.study.kotlin_mvp_demo.beans.ArticlePage
+import leo.study.kotlin_mvp_demo.beans.Articles
+import leo.study.kotlin_mvp_demo.beans.BannerModel
 import leo.study.kotlin_mvp_demo.common.BaseRequest
-import leo.study.kotlin_mvp_demo.model.home.BannerModel
 import leo.study.kotlin_mvp_demo.net.MainRetrofit
 import leo.study.lib_base.mvp.BaseModel
 
@@ -20,8 +22,16 @@ import leo.study.lib_base.mvp.BaseModel
  * ***********************************************************************
  */
 class HomeModel :BaseModel(),HomeContact.Model {
-    override fun getBanner(): Observable<BaseRequest<List<BannerModel>>> {
-        return MainRetrofit().getService().getBanner()
+    override fun getBanner(): Observable<BaseRequest<MutableList<BannerModel>>> {
+        return MainRetrofit().apiService.getBanner()
+    }
+
+    override fun getArticles(pageNum: Int): Observable<BaseRequest<ArticlePage>> {
+        return MainRetrofit().apiService.getArticles(pageNum)
+    }
+
+    override fun getTopArticles(): Observable<BaseRequest<MutableList<Articles>>> {
+        return MainRetrofit().apiService.getTopArticles()
     }
 
 

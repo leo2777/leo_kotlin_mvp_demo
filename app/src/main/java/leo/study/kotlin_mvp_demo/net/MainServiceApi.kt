@@ -1,10 +1,12 @@
 package leo.study.kotlin_mvp_demo.net
 
 import io.reactivex.Observable
+import leo.study.kotlin_mvp_demo.beans.ArticlePage
+import leo.study.kotlin_mvp_demo.beans.Articles
+import leo.study.kotlin_mvp_demo.beans.BannerModel
 import leo.study.kotlin_mvp_demo.common.BaseRequest
-import leo.study.kotlin_mvp_demo.model.home.BannerModel
 import retrofit2.http.GET
-import java.lang.invoke.CallSite
+import retrofit2.http.Path
 
 
 /**
@@ -32,9 +34,24 @@ interface MainServiceApi {
      * @return
      */
     @GET("banner/json")
-    fun getBanner():Observable<BaseRequest<List<BannerModel>>>
+    fun getBanner():Observable<BaseRequest<MutableList<BannerModel>>>
+
+    /**
+     * 获取 文章列表
+     *
+     * @param pageNum 页数 0开始
+     * @return
+     */
+    @GET("article/list/{pageNum}/json")
+    fun getArticles(@Path("pageNum") pageNum:Int):Observable<BaseRequest<ArticlePage>>
 
 
-
+    /**
+     * 获取 置顶文章列表
+     *
+     * @return
+     */
+    @GET("article/top/json")
+    fun getTopArticles():Observable<BaseRequest<MutableList<Articles>>>
 
 }

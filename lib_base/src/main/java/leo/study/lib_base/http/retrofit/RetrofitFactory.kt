@@ -32,7 +32,7 @@ import kotlin.math.log
 abstract class RetrofitFactory<T>() {
     //超时时间
     private val timeOut : Long = 20
-    private var apiService : T
+    val apiService : T
 
 
     /**

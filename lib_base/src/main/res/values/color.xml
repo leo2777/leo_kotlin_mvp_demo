@@ -7,6 +7,8 @@
 
     <color name="color_white">#ffffff</color>
 
+    <color name="color_theme">#BB86FC</color>
 
-    <color name="color_theme">#FFBB86FC</color>
+    <color name="color_red_f44366">#F44336</color>
+    <color name="color_purple_b184ea">#B184EA</color>
 </resources>

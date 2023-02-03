@@ -34,6 +34,7 @@ import java.net.UnknownHostException
 fun <T : Any> Observable<T>.leoSubscribe(
     iBaseView: ITopView? = null,
     iModel: IModel? = null,
+    isShowLoad:Boolean = false,
     msg: String = "",
     onSuccess: (T) -> Unit
 ) {
@@ -41,11 +42,10 @@ fun <T : Any> Observable<T>.leoSubscribe(
         .subscribe(object : Observer<T>{
             override fun onSubscribe(d: Disposable) {
                 iModel?.disposablePool?.add(d)
-                iBaseView?.showLoading((msg.ifEmpty { "请求中···" }),false)
+                if (isShowLoad)iBaseView?.showLoading((msg.ifEmpty { "请求中···" }),false)
             }
             override fun onNext(t: T) {
                 val bean = t as BaseRequest<*>
-                Logger.e(bean.toString())
                 when(bean.errorCode){
                     CodeStatus.SUCCESS_CODE -> {
                         onSuccess.invoke(t)

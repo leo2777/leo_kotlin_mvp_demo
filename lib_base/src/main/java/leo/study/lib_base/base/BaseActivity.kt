@@ -11,11 +11,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.viewbinding.ViewBinding
 import leo.study.lib_base.R
 import leo.study.lib_base.utils.ActivityUtils
 import leo.study.lib_base.utils.ProgressDialogUtils
+import leo.study.lib_base.utils.StatusBarUtils
 import kotlin.properties.Delegates
 
 
@@ -62,7 +64,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         _binding = getViewBinding()
         setContentView(_binding.root)
         //隐藏actionbar
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
         setStatesBar()
         initView()
         progressDialog = ProgressDialogUtils(this, R.style.commonDialogStyle)
@@ -75,6 +77,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
      * 设置状态栏 actionBar
      */
     private fun setStatesBar() {
+        StatusBarUtils.setColor(this,ContextCompat.getColor(this,R.color.color_theme),0)
     }
 
     override fun startActivity(intent: Intent?) {

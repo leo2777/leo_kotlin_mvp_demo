@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smart.refresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.mvp.fragment.home.HomeFragment">
 
-    <com.youth.banner.Banner
-        android:id="@+id/banner_home_top"
+    <com.scwang.smart.refresh.header.BezierRadarHeader
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        app:srlAccentColor="@color/white"
+        app:srlPrimaryColor="@color/color_theme" />
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/refresh_home"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
-        <com.scwang.smart.refresh.header.BezierRadarHeader
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srlPrimaryColor="@color/color_theme"
-            app:srlAccentColor="@color/white"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rec_home_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:background="@color/white"/>
-        <com.scwang.smart.refresh.footer.BallPulseFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlNormalColor="@color/color_theme"/>
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+            android:orientation="vertical">
 
-</LinearLayout>
+            <com.youth.banner.Banner
+                android:id="@+id/banner_home_top"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rec_home_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                android:paddingVertical="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/adapter_home_article" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.scwang.smart.refresh.footer.BallPulseFooter
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srlAnimatingColor="@color/color_theme" />
+</com.scwang.smart.refresh.layout.SmartRefreshLayout>

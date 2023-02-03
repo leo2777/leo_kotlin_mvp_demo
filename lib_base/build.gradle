@@ -62,6 +62,11 @@ dependencies {
     //toasty 颜色吐司
     api rootProject.ext.dependencies.toasty
 
+    //布局适配
+    api rootProject.ext.dependencies.autoSize
+
+    //recyclerView 万能适配器  https://github.com/CymChad/BaseRecyclerViewAdapterHelper/wiki
+    api rootProject.ext.dependencies.adapterHelper
 
     testImplementation rootProject.ext.dependencies.junit
     androidTestImplementation rootProject.ext.dependencies.testJunit

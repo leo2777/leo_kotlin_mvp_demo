@@ -4,7 +4,7 @@ ext {
      * 基础配置
      */
     android = [
-            compileSdk               : 32,
+            compileSdk               : 33,
             minSdk                   : 21,
             targetSdk                : 32,
             versionCode              : 1,
@@ -50,6 +50,10 @@ ext {
             banner               : "2.2.2",
             //智能刷新控件（smartRefreshLayout）
             smart_refresh        : "2.0.5",
+            //布局适配
+            autoSize             : "1.2.1",
+            //recyclerView  适配器 （BRVAH）
+            adapterHelper        : "4.0.0-beta04",
     ]
 
     /**
@@ -99,6 +103,11 @@ ext {
             smart_refresh_head_material: "io.github.scwang90:refresh-header-material:$version.smart_refresh",
             smart_refresh_food_ball    : "io.github.scwang90:refresh-footer-ball:$version.smart_refresh",
             smart_refresh_food_classics: "io.github.scwang90:refresh-footer-classics:$version.smart_refresh",
+
+            //布局适配
+            autoSize                   : "me.jessyan:autosize:$version.autoSize",
+            //recyclerView  适配器 （BRVAH）
+            adapterHelper              : "io.github.cymchad:BaseRecyclerViewAdapterHelper:$version.adapterHelper",
     ]
 
 }

@@ -1,8 +1,10 @@
 package leo.study.kotlin_mvp_demo.ui.mvp.fragment.home
 
 import io.reactivex.Observable
+import leo.study.kotlin_mvp_demo.beans.ArticlePage
+import leo.study.kotlin_mvp_demo.beans.Articles
+import leo.study.kotlin_mvp_demo.beans.BannerModel
 import leo.study.kotlin_mvp_demo.common.BaseRequest
-import leo.study.kotlin_mvp_demo.model.home.BannerModel
 import leo.study.lib_base.mvp.IModel
 import leo.study.lib_base.mvp.IPresenter
 import leo.study.lib_base.mvp.IView
@@ -29,6 +31,13 @@ interface HomeContact {
          * @param [list] 数据实体
          */
         fun getBannerSuccess(list: List<BannerModel>)
+
+        /**
+         * 获取列表数据成功返回 （置顶列表和文章列表）
+         *
+         * @param [list] 数据实体
+         */
+        fun getListDataSuccess(result:ArticlePage)
     }
 
     interface Presenter: IPresenter<View,Model>{
@@ -38,6 +47,20 @@ interface HomeContact {
          */
         fun getBanner()
 
+        /**
+         * 获取页面所有数据
+         *
+         */
+        fun getHomeData()
+
+        /**
+         * 获取文章列表
+         *
+         * @param [pageNum] 页码
+         */
+        fun getArticles(pageNum:Int)
+
+
     }
 
     interface Model : IModel{
@@ -46,7 +69,16 @@ interface HomeContact {
          *
          * @return 数据实体
          */
-        fun getBanner():Observable<BaseRequest<List<BannerModel>>>
+        fun getBanner():Observable<BaseRequest<MutableList<BannerModel>>>
+
+        fun getArticles(pageNum:Int):Observable<BaseRequest<ArticlePage>>
+
+        /**
+         * 获取置顶文章列表
+         *
+         * @return 数据实体
+         */
+        fun getTopArticles():Observable<BaseRequest<MutableList<Articles>>>
 
     }
 }

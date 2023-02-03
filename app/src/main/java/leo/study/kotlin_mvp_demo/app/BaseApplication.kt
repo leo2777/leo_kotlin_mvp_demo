@@ -118,8 +118,8 @@ class BaseApplication : Application() {
             .errorResId(leo.study.lib_base.R.drawable.icon_default_image_error)  //错误图片
 //            .width(300)   //目标宽度
 //            .height(300)  //目标高度
-            .isCenterCrop(false)  //是否居中裁剪
-            .isCenterInside(true) //是否是显示所有居中
+//            .isCenterCrop(false)  //是否居中裁剪
+//            .isCenterInside(true) //是否是显示所有居中
 //            .config(Bitmap.Config.ARGB_8888) //Bitmap类型
             .build()
         //设置代理类
