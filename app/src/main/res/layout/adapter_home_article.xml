@@ -90,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:contentDescription="@null"
                 android:src="@drawable/icon_home_article_collect_default"/>
         </LinearLayout>
     </LinearLayout>

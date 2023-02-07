@@ -63,8 +63,6 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         context = this
         _binding = getViewBinding()
         setContentView(_binding.root)
-        //隐藏actionbar
-//        supportActionBar?.hide()
         setStatesBar()
         initView()
         progressDialog = ProgressDialogUtils(this, R.style.commonDialogStyle)

@@ -1,5 +1,7 @@
 package leo.study.kotlin_mvp_demo.ui.test;
 
+import static leo.study.lib_base.ext.CommonExtKt.showInfo;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
@@ -18,7 +20,6 @@ import org.jetbrains.annotations.Nullable;
 
 import leo.study.kotlin_mvp_demo.R;
 import leo.study.kotlin_mvp_demo.databinding.ActivityJavaTestBinding;
-import leo.study.kotlin_mvp_demo.utils.ToastyUtils;
 import leo.study.lib_base.image.ImageLoaderHelper;
 import leo.study.lib_base.mvp.BaseMvpActivity;
 import leo.study.lib_base.mvp.ITopPresenter;
@@ -32,7 +33,7 @@ public class JavaTestActivity extends BaseMvpActivity<ActivityJavaTestBinding,Te
     @Override
     public void initView() {
 
-        getBinding().btnTest.setOnClickListener(view -> ToastyUtils.INSTANCE.showInfo("测试点击事件"));
+        getBinding().btnTest.setOnClickListener(view -> showInfo(this,"测试点击事件"));
 
     }
 

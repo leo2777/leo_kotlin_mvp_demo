@@ -4,9 +4,11 @@ import io.reactivex.Observable
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.beans.Articles
 import leo.study.kotlin_mvp_demo.beans.BannerModel
+import leo.study.kotlin_mvp_demo.beans.ProjectCategory
 import leo.study.kotlin_mvp_demo.common.BaseRequest
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 /**
@@ -23,6 +25,7 @@ import retrofit2.http.Path
  */
 interface MainServiceApi {
 
+//==================================================================================================
 
     /**
      * 首页
@@ -34,7 +37,7 @@ interface MainServiceApi {
      * @return
      */
     @GET("banner/json")
-    fun getBanner():Observable<BaseRequest<MutableList<BannerModel>>>
+    fun getBanner(): Observable<BaseRequest<MutableList<BannerModel>>>
 
     /**
      * 获取 文章列表
@@ -43,7 +46,7 @@ interface MainServiceApi {
      * @return
      */
     @GET("article/list/{pageNum}/json")
-    fun getArticles(@Path("pageNum") pageNum:Int):Observable<BaseRequest<ArticlePage>>
+    fun getArticles(@Path("pageNum") pageNum: Int): Observable<BaseRequest<ArticlePage>>
 
 
     /**
@@ -52,6 +55,35 @@ interface MainServiceApi {
      * @return
      */
     @GET("article/top/json")
-    fun getTopArticles():Observable<BaseRequest<MutableList<Articles>>>
+    fun getTopArticles(): Observable<BaseRequest<MutableList<Articles>>>
 
+
+//==================================================================================================
+
+
+    /**
+     * 项目页面
+     */
+
+    /**
+     * 获取分类列表
+     *
+     * @return 数据实体
+     */
+    @GET("project/tree/json")
+    fun getProjectCateGory(): Observable<BaseRequest<MutableList<ProjectCategory>>>
+
+
+    /**
+     * 获取分类下文章列表
+     *
+     * @param [page] 页数
+     * @param [id] 分类id
+     * @return 数据实体
+     */
+    @GET("project/list/{page}/json")
+    fun getProjectArticles(
+        @Path("page") page: Int,
+        @Query("cid") id: String
+    ): Observable<BaseRequest<ArticlePage>>
 }

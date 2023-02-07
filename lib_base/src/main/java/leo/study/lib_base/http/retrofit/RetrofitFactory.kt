@@ -3,6 +3,7 @@ package leo.study.lib_base.http.retrofit
 import android.util.Log.e
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import leo.study.lib_base.ext.showLogD
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -43,13 +44,11 @@ abstract class RetrofitFactory<T>() {
         val dispatcher = Dispatcher(Executors.newFixedThreadPool(20))
         dispatcher.maxRequests = 20
         dispatcher.maxRequestsPerHost = 1
-        val logInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message -> })
-        logInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
 
         val httpClient = OkHttpClient.Builder()
             .dispatcher(dispatcher)
-            .addInterceptor(logInterceptor)
+            .addInterceptor(this.setLoggingInterceptor())
             .addInterceptor { chain ->
                 var builder = chain.request().newBuilder()
                 builder.addHeader("Cache-Control", "max-age=0")
@@ -68,6 +67,7 @@ abstract class RetrofitFactory<T>() {
             .client(httpClient)
             .build()
             .create(this.setApiService())
+
     }
 
 
@@ -85,6 +85,14 @@ abstract class RetrofitFactory<T>() {
      * 设置头部
      */
     abstract fun setHeader(builder:Request.Builder):Request.Builder
+
+    /**
+     * 设置log 拦截器
+     *
+     * @param [interceptor] 拦截器
+     * @return 拦截器
+     */
+    abstract fun setLoggingInterceptor():HttpLoggingInterceptor
 
     /**
      * 获取retrofit

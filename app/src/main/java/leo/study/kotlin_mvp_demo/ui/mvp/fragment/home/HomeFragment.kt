@@ -1,34 +1,28 @@
 package leo.study.kotlin_mvp_demo.ui.mvp.fragment.home
 
-import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.orhanobut.logger.Logger
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
-import leo.study.kotlin_mvp_demo.beans.Articles
 import leo.study.kotlin_mvp_demo.beans.BannerModel
-import leo.study.kotlin_mvp_demo.databinding.AdapterHomeArticleBinding
 import leo.study.lib_base.mvp.BaseMvpFragment
 import leo.study.kotlin_mvp_demo.databinding.FragmentHomeBinding
-import leo.study.lib_base.image.ImageLoaderHelper
+import leo.study.lib_base.ext.load
 
 /**
  * 首页
  */
-class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContact.View,
-        HomeContact.Presenter>(), HomeContact.View {
+class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContract.View,
+        HomeContract.Presenter>(), HomeContract.View {
 
-    override var presenter: HomeContact.Presenter = HomePresenter()
+    override var presenter: HomeContract.Presenter = HomePresenter()
 
     //页数
     private var pageNum: Int = 0
@@ -51,12 +45,21 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContact.View,
         return FragmentHomeBinding.inflate(inflater, container, false)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
 
     override fun initView(view: View) {
         setRefresh()
         setBanner()
         setRvAdapter()
-        presenter.getHomeData()
+
+        presenter.getHomeData(true)
     }
 
     override fun lazyLoad() {
@@ -70,18 +73,12 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContact.View,
         binding.refreshHome.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 pageNum++
-                //加载完所有数据
-                if (pageCount != 0 && pageNum > pageCount) {
-                    pageNum = pageCount
-                    refreshLayout.setNoMoreData(true)
-                    return
-                }
                 presenter.getArticles(pageNum)
             }
 
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 pageNum = 0
-                presenter.getHomeData()
+                presenter.getHomeData(false)
             }
         })
     }
@@ -89,7 +86,6 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContact.View,
 
     /**
      * 设置banner
-     * todo: 后续设置banner切换 改变状态栏颜色
      */
     private fun setBanner() {
         binding.bannerHomeTop.setOnBannerListener { data, position ->
@@ -109,16 +105,17 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContact.View,
      */
     override fun getBannerSuccess(list: List<BannerModel>) {
 
-        binding.bannerHomeTop.setAdapter(object : BannerImageAdapter<BannerModel?>(list) {
+        binding.bannerHomeTop.setAdapter(object : BannerImageAdapter<BannerModel>(list) {
             override fun onBindView(
-                holder: BannerImageHolder?,
-                data: BannerModel?,
+                holder: BannerImageHolder,
+                data: BannerModel,
                 position: Int,
                 size: Int,
             ) {
-                holder?.imageView?.scaleType = ImageView.ScaleType.FIT_XY
-                ImageLoaderHelper.instance.loadImage(holder?.imageView, data?.imagePath)
-                holder?.itemView?.setOnClickListener {
+
+                holder.imageView.scaleType = ImageView.ScaleType.FIT_XY
+                holder.imageView.load(data.imagePath)
+                holder.itemView.setOnClickListener {
                     //todo:这里后续需要完善 跳转网页显示的 Activity
                 }
             }
@@ -136,13 +133,13 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContact.View,
         //结束刷新和加载
         binding.refreshHome.finishRefresh()
         binding.refreshHome.finishLoadMore()
-        //获取总页数
-        pageCount = result.pageCount
+
+        binding.refreshHome.setNoMoreData(result.over)
 
         if (pageNum == 0) {
-            homeAdapter.submitList(result.datas)
+            homeAdapter.submitList(result.articles)
         } else {
-            homeAdapter.addAll(result.datas)
+            homeAdapter.addAll(result.articles)
         }
     }
 

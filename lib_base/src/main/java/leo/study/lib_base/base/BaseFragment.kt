@@ -64,9 +64,9 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         savedStanceState(savedInstanceState)
         mContext = context
-        initView(view)
         progressDialog = context?.let { ProgressDialogUtils(it, R.style.commonDialogStyle) }
 
+        initView(view)
     }
 
     override fun onResume() {

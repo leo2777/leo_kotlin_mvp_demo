@@ -6,8 +6,7 @@ import android.view.View.OnClickListener
 import android.widget.Toast
 import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.databinding.ActivityKotlinTestBinding
-import leo.study.kotlin_mvp_demo.utils.ToastyUtils
-import leo.study.lib_base.image.ImageLoaderHelper
+import leo.study.lib_base.ext.*
 import leo.study.lib_base.mvp.BaseMvpActivity
 
 class KotlinTestActivity: BaseMvpActivity<ActivityKotlinTestBinding,TestContract.View,TestContract.Presenter>(),TestContract.View,OnClickListener {
@@ -46,6 +45,16 @@ class KotlinTestActivity: BaseMvpActivity<ActivityKotlinTestBinding,TestContract
         binding.buttonInfo.setOnClickListener(this)
         binding.buttonError.setOnClickListener(this)
 
+        this.setClickViews(binding.buttonSuccess,binding.buttonInfo)
+
+        binding.buttonInfo.clickWithDuration(1000) {
+
+        }
+        this.showSuccess("测试")
+        binding.buttonSuccess.onClick {
+        }
+        binding.buttonSuccess.onLongClick { return@onLongClick true }
+
     }
 
     override fun initData() {
@@ -61,11 +70,11 @@ class KotlinTestActivity: BaseMvpActivity<ActivityKotlinTestBinding,TestContract
     override fun onClick(v: View?) {
         if (v == null )return
         when(v.id){
-            R.id.button_success ->  ToastyUtils.showSuccess("展示 success 级别吐司")
-            R.id.button_error ->  ToastyUtils.showError("展示 error 级别吐司")
-            R.id.button_info -> ToastyUtils.showInfo("展示 info 级别吐司")
-            R.id.button_normal -> ToastyUtils.showNormal("展示 normal 级别吐司")
-            R.id.button_warning -> ToastyUtils.showWarning("展示 warning 级别吐司")
+            R.id.button_success ->  showSuccess("展示 success 级别吐司")
+            R.id.button_error ->  showError("展示 error 级别吐司")
+            R.id.button_info -> showInfo("展示 info 级别吐司")
+            R.id.button_normal -> showNormal("展示 normal 级别吐司")
+            R.id.button_warning -> showWarning("展示 warning 级别吐司")
         }
     }
 

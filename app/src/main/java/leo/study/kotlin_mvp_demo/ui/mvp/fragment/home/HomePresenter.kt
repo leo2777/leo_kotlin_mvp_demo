@@ -1,9 +1,7 @@
 package leo.study.kotlin_mvp_demo.ui.mvp.fragment.home
 
-import android.os.Build.VERSION_CODES.P
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
-import io.reactivex.internal.operators.observable.ObservableZip
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.beans.Articles
 import leo.study.kotlin_mvp_demo.common.BaseRequest
@@ -23,9 +21,9 @@ import leo.study.lib_base.mvp.BasePresenter
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
-class HomePresenter : BasePresenter<HomeContact.View>(), HomeContact.Presenter {
+class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter {
 
-    override var model: HomeContact.Model? = HomeModel()
+    override var model: HomeContract.Model? = HomeModel()
 
 
     /**
@@ -40,9 +38,10 @@ class HomePresenter : BasePresenter<HomeContact.View>(), HomeContact.Presenter {
 
     /**
      * 获取页面数据
-     *
+     *@param [isShowLoading] 是否显示加载框
      */
-    override fun getHomeData() {
+    override fun getHomeData(isShowLoading:Boolean) {
+
         //banner
         getBanner()
 
@@ -52,12 +51,12 @@ class HomePresenter : BasePresenter<HomeContact.View>(), HomeContact.Presenter {
                 top.data.forEach {
                     it.top = "1"
                 }
-                all.data.datas.addAll(0, top.data)
+                all.data.articles.addAll(0, top.data)
                 all
             })
 
         //完成之后 返回view
-        observable.leoSubscribe(view, model, false) {
+        observable.leoSubscribe(view, model, isShowLoading) {
             view!!.getListDataSuccess(it.data)
         }
 

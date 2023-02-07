@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_project"
-        android:name="leo.study.kotlin_mvp_demo.ui.fragment.ProjectFragment"
+        android:name="leo.study.kotlin_mvp_demo.ui.mvp.fragment.project.ProjectFragment"
         android:label="@string/title_project"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_project" />
 
     <fragment
         android:id="@+id/navigation_square"

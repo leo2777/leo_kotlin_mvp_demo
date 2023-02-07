@@ -2,12 +2,12 @@ package leo.study.kotlin_mvp_demo.net
 
 import android.widget.Toast
 import com.google.gson.JsonParseException
-import com.orhanobut.logger.Logger
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import leo.study.kotlin_mvp_demo.app.BaseApplication
 import leo.study.kotlin_mvp_demo.common.BaseRequest
-import leo.study.kotlin_mvp_demo.utils.ToastyUtils
+import leo.study.lib_base.base.BaseActivity
 import leo.study.lib_base.http.constant.CodeStatus
 import leo.study.lib_base.mvp.IModel
 import leo.study.lib_base.mvp.ITopView
@@ -15,6 +15,10 @@ import leo.study.lib_base.scheduler.SchedulerUtils
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import leo.study.lib_base.ext.showError
+import leo.study.lib_base.ext.showLogD
+import leo.study.lib_base.ext.showLogE
+import leo.study.lib_base.ext.showLogI
 
 
 /**
@@ -48,14 +52,17 @@ fun <T : Any> Observable<T>.leoSubscribe(
                 val bean = t as BaseRequest<*>
                 when(bean.errorCode){
                     CodeStatus.SUCCESS_CODE -> {
+                        showLogD("请求成功，数据返回：$bean")
                         onSuccess.invoke(t)
                     }
                     CodeStatus.FAIL_CODE ->{
                         if (bean.errorMsg.isEmpty()){
-                            ToastyUtils.showError("请求成功，返回数据错误！")
+                            showLogE("请求成功，返回数据错误！")
+                            iBaseView?.getCtx()?.showError("请求成功，返回数据错误！")
                             return
                         }
-                        ToastyUtils.showError(bean.errorMsg)
+                        showLogE(bean.errorMsg)
+                        iBaseView?.getCtx()?.showError(bean.errorMsg)
                     }
 
                 }
@@ -65,13 +72,16 @@ fun <T : Any> Observable<T>.leoSubscribe(
 
                 when (e) {
                     is SocketTimeoutException, is ConnectException, is UnknownHostException -> {
-                        ToastyUtils.showError("连接失败，请检查网络状况")
+                        showLogE("连接失败，请检查网络状况")
+                        iBaseView?.getCtx()?.showError("连接失败，请检查网络状况")
                     }
                     is JsonParseException -> {
-                        ToastyUtils.showError("请求成功，数据解析失败！")
+                        showLogE("请求成功，数据解析失败！")
+                        iBaseView?.getCtx()?.showError("请求成功，数据解析失败！")
                     }
                     else -> {
-                        ToastyUtils.showError("未知错误！")
+                        showLogE("未知错误！")
+                        iBaseView?.getCtx()?.showError("未知错误！")
                     }
                 }
 

@@ -21,7 +21,7 @@ import leo.study.lib_base.mvp.BaseModel
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
-class HomeModel :BaseModel(),HomeContact.Model {
+class HomeModel :BaseModel(),HomeContract.Model {
     override fun getBanner(): Observable<BaseRequest<MutableList<BannerModel>>> {
         return MainRetrofit().apiService.getBanner()
     }

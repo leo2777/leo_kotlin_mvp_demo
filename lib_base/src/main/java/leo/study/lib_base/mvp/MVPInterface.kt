@@ -134,8 +134,8 @@ interface IView<P : ITopPresenter> : ITopView {
  * P层 基础 M,V 逻辑操作
  */
 interface IPresenter<V : ITopView, M : ITopModel> : ITopPresenter {
-    var view: V?
     var model: M?
+    var view: V?
 
     fun getContext() = view?.getCtx()
 

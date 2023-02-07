@@ -22,7 +22,7 @@ import leo.study.lib_base.mvp.IView
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
-interface HomeContact {
+interface HomeContract {
 
     interface View : IView<Presenter>{
         /**
@@ -35,7 +35,7 @@ interface HomeContact {
         /**
          * 获取列表数据成功返回 （置顶列表和文章列表）
          *
-         * @param [list] 数据实体
+         * @param [result] 数据实体
          */
         fun getListDataSuccess(result:ArticlePage)
     }
@@ -51,7 +51,7 @@ interface HomeContact {
          * 获取页面所有数据
          *
          */
-        fun getHomeData()
+        fun getHomeData(isShowLoading:Boolean)
 
         /**
          * 获取文章列表
