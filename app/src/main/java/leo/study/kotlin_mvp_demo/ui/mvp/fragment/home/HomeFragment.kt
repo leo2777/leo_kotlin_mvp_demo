@@ -27,9 +27,6 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContract.View,
     //页数
     private var pageNum: Int = 0
 
-    //总页数，每次获取数据设置，用于判断加载完全部
-    private var pageCount: Int = 0
-
 
     private val homeAdapter by lazy { HomeArticleAdapter() }
 

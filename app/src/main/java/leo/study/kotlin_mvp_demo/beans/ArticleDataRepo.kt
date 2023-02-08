@@ -16,6 +16,61 @@ import com.google.gson.annotations.SerializedName
  * ***********************************************************************
  */
 
+
+/**
+ *  //文章分类数据实体 （公众号，项目 页面用到）
+ *  项目中多次用到，故提取
+ *
+ * @property articleList
+ * @property author
+ * @property children
+ * @property courseId
+ * @property cover
+ * @property desc
+ * @property id
+ * @property lisense
+ * @property lisenseLink
+ * @property name
+ * @property order
+ * @property parentChapterId
+ * @property type
+ * @property userControlSetTop
+ * @property visible
+ */
+data class ArticleCategory(
+    @SerializedName("articleList")
+    val articleList: List<Any>,
+    @SerializedName("author")
+    val author: String,
+    @SerializedName("children")
+    val children: List<Any>,
+    @SerializedName("courseId")
+    val courseId: Int,
+    @SerializedName("cover")
+    val cover: String,
+    @SerializedName("desc")
+    val desc: String,
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("lisense")
+    val lisense: String,
+    @SerializedName("lisenseLink")
+    val lisenseLink: String,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("order")
+    val order: Int,
+    @SerializedName("parentChapterId")
+    val parentChapterId: Int,
+    @SerializedName("type")
+    val type: Int,
+    @SerializedName("userControlSetTop")
+    val userControlSetTop: Boolean,
+    @SerializedName("visible")
+    val visible: Int
+)
+
+
 /**
  * 文章标志
  *

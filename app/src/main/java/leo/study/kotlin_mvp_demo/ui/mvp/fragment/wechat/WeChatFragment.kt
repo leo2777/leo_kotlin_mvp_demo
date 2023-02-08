@@ -1,4 +1,4 @@
-package leo.study.kotlin_mvp_demo.ui.mvp.fragment.project
+package leo.study.kotlin_mvp_demo.ui.mvp.fragment.wechat
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,19 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import leo.study.kotlin_mvp_demo.beans.ArticleCategory
-import leo.study.kotlin_mvp_demo.databinding.FragmentProjectBinding
-import leo.study.kotlin_mvp_demo.ui.mvp.fragment.project_article.ProjectArticleFragment
-import leo.study.lib_base.ext.showLogD
+import leo.study.kotlin_mvp_demo.databinding.FragmentWeChatBinding
+import leo.study.kotlin_mvp_demo.ui.mvp.fragment.wechat_article.WeChatArticleFragment
 import leo.study.lib_base.mvp.BaseMvpFragment
 
-/**
- * 项目分页
- */
-class ProjectFragment : BaseMvpFragment<
-        FragmentProjectBinding,
-        ProjectContract.View,
-        ProjectContract.Presenter>(), ProjectContract.View {
 
+class WeChatFragment : BaseMvpFragment<
+        FragmentWeChatBinding,
+        WeChatContract.View,
+        WeChatContract.Presenter>(), WeChatContract.View {
 
     private var fragments: MutableList<Fragment> = ArrayList()
 
@@ -28,13 +24,13 @@ class ProjectFragment : BaseMvpFragment<
 
     private var layoutMediator:TabLayoutMediator ?= null
 
-    override var presenter: ProjectContract.Presenter = ProjectPresenter()
+    override var presenter: WeChatContract.Presenter = WeChatPresenter()
 
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentProjectBinding {
-        return FragmentProjectBinding.inflate(inflater, container, false)
+    ): FragmentWeChatBinding {
+        return FragmentWeChatBinding.inflate(inflater,container,false)
     }
 
     override fun onDestroyView() {
@@ -49,8 +45,9 @@ class ProjectFragment : BaseMvpFragment<
     override fun lazyLoad() {
     }
 
+
     private fun setVpAndTab(){
-        binding.vpProjectCategory.adapter = (object : FragmentStateAdapter(this) {
+        binding.vpWechatCategory.adapter = (object : FragmentStateAdapter(this) {
             override fun createFragment(position: Int): Fragment {
                 return fragments[position]
             }
@@ -61,7 +58,7 @@ class ProjectFragment : BaseMvpFragment<
         })
 
         layoutMediator = TabLayoutMediator(
-            binding.tabProjectCategory, binding.vpProjectCategory,
+            binding.tabWechatCategory, binding.vpWechatCategory,
             false, true
         ) { tab, sum ->
             tab.text = category[sum].name
@@ -70,12 +67,11 @@ class ProjectFragment : BaseMvpFragment<
         layoutMediator?.attach()
     }
 
-
     override fun getCategorySuccess(result: MutableList<ArticleCategory>) {
         for (model:ArticleCategory in result){
-            val bundle:Bundle = Bundle()
-            bundle.putString("id", model.id.toString())
-            val fragment : ProjectArticleFragment = ProjectArticleFragment()
+            val bundle: Bundle = Bundle()
+            bundle.putString("authorId", model.id.toString())
+            val fragment : WeChatArticleFragment = WeChatArticleFragment()
             fragment.arguments = bundle
             fragments.add(fragment)
         }

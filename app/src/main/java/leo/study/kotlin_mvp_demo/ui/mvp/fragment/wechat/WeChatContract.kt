@@ -1,4 +1,4 @@
-package leo.study.kotlin_mvp_demo.ui.mvp.fragment.project
+package leo.study.kotlin_mvp_demo.ui.mvp.fragment.wechat
 
 import io.reactivex.Observable
 import leo.study.kotlin_mvp_demo.beans.ArticleCategory
@@ -11,38 +11,40 @@ import leo.study.lib_base.mvp.IView
 /**
  *
  * ***********************************************************************
- *the project desc: 项目页面 MVP 契约类
- *this name is ProjectContact
+ *the project desc: 公众号 契约类
+ *this name is WeChatContract
  *this from package leo_kotlin_mvp_demo
  *this create by machine leo mark
- *this full time on 2023年02月07日 11:26:54
+ *this full time on 2023年02月08日 11:06:51
  *this developer is 冯立仁
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
-interface ProjectContract {
+interface WeChatContract {
+
     interface View:IView<Presenter>{
         /**
-         * 获取数据成功回调
+         * 请求成功 数据回调
          *
-         * @param [result] 结果数据实体（列表）
+         * @param result 数据实体
          */
         fun getCategorySuccess(result:MutableList<ArticleCategory>)
     }
 
     interface Presenter:IPresenter<View,Model>{
         /**
-         * 分类列表数据
+         * 获取数据
+         *
          */
         fun getCategory()
     }
 
     interface Model:IModel{
         /**
-         * 获取分类列表
+         * 获取数据
          *
-         * @return 数据实体
+         * @return
          */
-        fun getCategory(): Observable<BaseRequest<MutableList<ArticleCategory>>>
+        fun getCategory():Observable<BaseRequest<MutableList<ArticleCategory>>>
     }
 }

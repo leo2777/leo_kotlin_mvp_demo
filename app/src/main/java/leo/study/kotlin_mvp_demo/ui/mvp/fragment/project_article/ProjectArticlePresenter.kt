@@ -20,8 +20,8 @@ class ProjectArticlePresenter:BasePresenter<ProjectArticleContract.View>(),Proje
 
 
     override fun getArticles(page: Int, id: String) {
-        model!!.getArticles(page,id).leoSubscribe (view,model) {
-            view!!.getArticleSuccess(it.data)
+        model?.getArticles(page,id)?.leoSubscribe (view,model) {
+            view?.getArticleSuccess(it.data)
         }
     }
 

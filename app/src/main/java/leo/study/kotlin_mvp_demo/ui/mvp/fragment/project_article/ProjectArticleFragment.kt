@@ -32,7 +32,7 @@ class ProjectArticleFragment : BaseMvpFragment<
     private val firstPage = 1
     private var page:Int = firstPage //页码数，从「1」开始
     private var cId:String = ""
-    private var projectAdapter:ProjectArticleAdapter = ProjectArticleAdapter()
+    private val projectAdapter by lazy { ProjectArticleAdapter() }
 
 
     override var presenter: ProjectArticleContract.Presenter = ProjectArticlePresenter()

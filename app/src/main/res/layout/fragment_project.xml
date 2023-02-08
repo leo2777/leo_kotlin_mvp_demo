@@ -9,9 +9,10 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_project_category"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="30dp"
         app:tabIndicatorFullWidth="true"
         app:tabUnboundedRipple="true"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
         app:tabGravity="start"
         app:tabMode="scrollable"
         app:tabRippleColor="@color/color_theme"

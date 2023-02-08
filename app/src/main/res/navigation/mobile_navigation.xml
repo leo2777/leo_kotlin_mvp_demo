@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_we_chat"
-        android:name="leo.study.kotlin_mvp_demo.ui.fragment.WeChatFragment"
+        android:name="leo.study.kotlin_mvp_demo.ui.mvp.fragment.wechat.WeChatFragment"
         android:label="@string/title_we_chat"
         tools:layout="@layout/fragment_we_chat" />
 

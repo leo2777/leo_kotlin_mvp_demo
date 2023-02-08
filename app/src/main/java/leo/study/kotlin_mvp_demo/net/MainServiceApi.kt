@@ -1,10 +1,7 @@
 package leo.study.kotlin_mvp_demo.net
 
 import io.reactivex.Observable
-import leo.study.kotlin_mvp_demo.beans.ArticlePage
-import leo.study.kotlin_mvp_demo.beans.Articles
-import leo.study.kotlin_mvp_demo.beans.BannerModel
-import leo.study.kotlin_mvp_demo.beans.ProjectCategory
+import leo.study.kotlin_mvp_demo.beans.*
 import leo.study.kotlin_mvp_demo.common.BaseRequest
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -71,7 +68,7 @@ interface MainServiceApi {
      * @return 数据实体
      */
     @GET("project/tree/json")
-    fun getProjectCateGory(): Observable<BaseRequest<MutableList<ProjectCategory>>>
+    fun getProjectCateGory(): Observable<BaseRequest<MutableList<ArticleCategory>>>
 
 
     /**
@@ -85,5 +82,34 @@ interface MainServiceApi {
     fun getProjectArticles(
         @Path("page") page: Int,
         @Query("cid") id: String
+    ): Observable<BaseRequest<ArticlePage>>
+
+
+//==================================================================================================
+
+
+
+
+
+    /**
+     * 获取公众号分类数据（作者）
+     *
+     * @return 数据实体
+     */
+    @GET("wxarticle/chapters/json")
+    fun getWeChatCategory(): Observable<BaseRequest<MutableList<ArticleCategory>>>
+
+
+    /**
+     * 获取当前分类下公众号
+     *
+     * @param [authorId] 作者ID
+     * @param [page] 页数
+     * @return 数据实体
+     */
+    @GET("wxarticle/list/{authorId}/{page}/json")
+    fun getWeChatArticle(
+        @Path("authorId") authorId: String,
+        @Path("page") page: Int
     ): Observable<BaseRequest<ArticlePage>>
 }

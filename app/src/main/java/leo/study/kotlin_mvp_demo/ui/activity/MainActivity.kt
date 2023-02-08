@@ -8,7 +8,7 @@ import leo.study.kotlin_mvp_demo.databinding.ActivityMainBinding
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.project.ProjectFragment
 import leo.study.kotlin_mvp_demo.ui.fragment.SquareFragment
 import leo.study.kotlin_mvp_demo.ui.fragment.UserFragment
-import leo.study.kotlin_mvp_demo.ui.fragment.WeChatFragment
+import leo.study.kotlin_mvp_demo.ui.mvp.fragment.wechat.WeChatFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeFragment
 import leo.study.lib_base.base.BaseActivity
 

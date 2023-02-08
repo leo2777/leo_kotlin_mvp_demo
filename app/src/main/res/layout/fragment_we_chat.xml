@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.WeChatFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.mvp.fragment.wechat.WeChatFragment">
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_wechat_category"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:tabUnboundedRipple="true"
+        app:tabGravity="start"
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabRippleColor="@color/color_theme"
+        app:tabTextColor="@color/white"
+        app:tabSelectedTextColor="@color/color_theme"
+        app:tabIndicatorGravity="stretch"
+        app:tabIndicatorColor="@android:color/transparent"
+        app:tabIndicator="@drawable/shape_solid_white_top_10dp"
+        android:background="@color/color_theme"/>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_wechat_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/title_we_chat" />
-
-</FrameLayout>
+        android:orientation="horizontal"/>
+</LinearLayout>
