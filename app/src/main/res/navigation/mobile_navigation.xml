@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_square"
-        android:name="leo.study.kotlin_mvp_demo.ui.fragment.SquareFragment"
+        android:name="leo.study.kotlin_mvp_demo.ui.mvp.fragment.more_square.SquareFragment"
         android:label="@string/title_square"
         tools:layout="@layout/fragment_square" />
 

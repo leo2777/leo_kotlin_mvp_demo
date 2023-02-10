@@ -112,4 +112,19 @@ interface MainServiceApi {
         @Path("authorId") authorId: String,
         @Path("page") page: Int
     ): Observable<BaseRequest<ArticlePage>>
+
+
+
+
+//==================================================================================================
+
+
+    /**
+     * 更多页面-广场子页面-获取广场文章数据
+     *
+     * @param page 页码
+     * @return 数据实体
+     */
+    @GET("user_article/list/{page}/json")
+    fun getSquareArticles(@Path("page") page:Int):Observable<BaseRequest<ArticlePage>>
 }

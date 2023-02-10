@@ -52,7 +52,14 @@ class HomeArticleAdapter : BaseQuickAdapter<Articles, QuickViewHolder>() {
             holder.setGone(R.id.tv_ada_home_article_tag_two, true)
         }
 
-        holder.setText(R.id.tv_ada_home_article_people, bean.author.ifEmpty { "未知作者" })
+        val people  = if (bean.author.isNotEmpty()){
+            bean.author
+        }else if (bean.shareUser.isNotEmpty()){
+            bean.shareUser
+        }else{
+            "——"
+        }
+        holder.setText(R.id.tv_ada_home_article_people,people)
         holder.setText(R.id.tv_ada_home_article_date, bean.niceDate)
         holder.setText(R.id.tv_ada_home_article_title, bean.title)
         holder.setText(

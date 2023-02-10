@@ -5,8 +5,9 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationBarView
 import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.databinding.ActivityMainBinding
+import leo.study.kotlin_mvp_demo.ui.fragment.MoreFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.project.ProjectFragment
-import leo.study.kotlin_mvp_demo.ui.fragment.SquareFragment
+import leo.study.kotlin_mvp_demo.ui.mvp.fragment.more_square.SquareFragment
 import leo.study.kotlin_mvp_demo.ui.fragment.UserFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.wechat.WeChatFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeFragment
@@ -24,7 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnIt
     private var index = homeFragmentIndex
 
     private var homeFragment: HomeFragment? = null
-    private var squareFragment: SquareFragment? = null
+    private var moreFragment: MoreFragment? = null
     private var weChatFragment: WeChatFragment? = null
     private var projectFragment: ProjectFragment? = null
     private var userFragment: UserFragment? = null
@@ -77,11 +78,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnIt
             }
             squareFragmentIndex -> {
                 binding.toolbarActivityMain.title = getString(R.string.title_square)
-                if (squareFragment == null) {
-                    squareFragment = SquareFragment()
-                    transaction.add(R.id.frame_fragment_activity_main, squareFragment!!, "广场")
+                if (moreFragment == null) {
+                    moreFragment = MoreFragment()
+                    transaction.add(R.id.frame_fragment_activity_main, moreFragment!!, "更多")
                 } else {
-                    transaction.show(squareFragment!!)
+                    transaction.show(moreFragment!!)
                 }
             }
             weChatFragmentIndex -> {
@@ -110,7 +111,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnIt
     private fun hideFragment(transaction: FragmentTransaction) {
         homeFragment?.let { transaction.hide(it) }
         projectFragment?.let { transaction.hide(it) }
-        squareFragment?.let { transaction.hide(it) }
+        moreFragment?.let { transaction.hide(it) }
         weChatFragment?.let { transaction.hide(it) }
         userFragment?.let { transaction.hide(it) }
     }
@@ -118,7 +119,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnIt
     private fun releaseFragment(){
         homeFragment = null
         projectFragment = null
-        squareFragment = null
+        moreFragment = null
         weChatFragment = null
         userFragment = null
     }
@@ -161,8 +162,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnIt
             if (homeFragment != null) {
                 fragmentTransaction.remove(homeFragment!!)
             }
-            if (squareFragment != null) {
-                fragmentTransaction.remove(squareFragment!!)
+            if (moreFragment != null) {
+                fragmentTransaction.remove(moreFragment!!)
             }
             if (projectFragment != null) {
                 fragmentTransaction.remove(projectFragment!!)
