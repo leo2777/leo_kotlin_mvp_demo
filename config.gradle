@@ -28,7 +28,7 @@ ext {
             espresso             : "3.4.0",
 
             //网络请求
-            retrofit             : "2.4.0",
+            retrofit              : "2.4.0",
             okHttp               : "3.10.0",
             okHTtpLogging        : "3.9.0",
             glide                : "4.5.0",
@@ -54,6 +54,8 @@ ext {
             autoSize             : "1.2.1",
             //recyclerView  适配器 （BRVAH）
             adapterHelper        : "4.0.0-beta04",
+            //流式布局
+            flexBoxLayout        : "3.0.0",
     ]
 
     /**
@@ -72,9 +74,9 @@ ext {
             espresso                   : "androidx.test.espresso:espresso-core:$version.espresso",
 
             //网络请求
-            retrofit                   : "com.squareup.retrofit2:retrofit:$version.retrofit",
-            retrofitGson               : "com.squareup.retrofit2:converter-gson:$version.retrofit",
-            retrofitRxJava             : "com.squareup.retrofit2:adapter-rxjava2:$version.retrofit",
+            retrofit                    : "com.squareup.retrofit2:retrofit:$version.retrofit",
+            retrofitGson                : "com.squareup.retrofit2:converter-gson:$version.retrofit",
+            retrofitRxJava              : "com.squareup.retrofit2:adapter-rxjava2:$version.retrofit",
             okHttp                     : "com.squareup.okhttp3:okhttp:$version.okHttp",
             okHttpLogging              : "com.squareup.okhttp3:logging-interceptor:$version.okHTtpLogging",
             glide                      : "com.github.bumptech.glide:glide:$version.glide",
@@ -105,9 +107,11 @@ ext {
             smart_refresh_food_classics: "io.github.scwang90:refresh-footer-classics:$version.smart_refresh",
 
             //布局适配
-            autoSize                   : "me.jessyan:autosize:$version.autoSize",
+            autoSize                   : "com.github.JessYanCoding:AndroidAutoSize:v$version.autoSize",
             //recyclerView  适配器 （BRVAH）
             adapterHelper              : "io.github.cymchad:BaseRecyclerViewAdapterHelper:$version.adapterHelper",
+            //流式布局
+            flexBoxLayout               : "com.google.android.flexbox:flexbox:$version.flexBoxLayout",
     ]
 
 }

@@ -1,6 +1,8 @@
 package leo.study.kotlin_mvp_demo.beans
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 
 /**
@@ -77,10 +79,11 @@ data class ArticleCategory(
  * @property [name] 名字
  * @property [url] 链接
  */
+@Parcelize
 data class ArticleTag(
     @SerializedName("name") val name: String,
     @SerializedName("url") val url: String,
-)
+) : Parcelable
 
 /**
  * 文章列表实体（分页）
@@ -143,6 +146,7 @@ data class ArticlePage(
  * @property zan 点赞
  * @property top 是否置顶  「1」 置顶,「0」普通  默认是「0」
  */
+@Parcelize
 data class Articles(
     //单个文章数据实体
     @SerializedName("adminAdd") val adminAdd: Boolean,
@@ -181,4 +185,4 @@ data class Articles(
     @SerializedName("visible") val visible: Int,
     @SerializedName("zan") val zan: Int,
     @SerializedName("top") var top: String,
-)
+) : Parcelable

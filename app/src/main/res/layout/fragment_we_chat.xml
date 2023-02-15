@@ -19,7 +19,7 @@
         app:tabSelectedTextColor="@color/color_theme"
         app:tabIndicatorGravity="stretch"
         app:tabIndicatorColor="@android:color/transparent"
-        app:tabIndicator="@drawable/shape_solid_white_top_10dp"
+        app:tabIndicator="@drawable/shape_solid_white_top_5dp"
         android:background="@color/color_theme"/>
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_wechat_category"

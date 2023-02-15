@@ -127,4 +127,22 @@ interface MainServiceApi {
      */
     @GET("user_article/list/{page}/json")
     fun getSquareArticles(@Path("page") page:Int):Observable<BaseRequest<ArticlePage>>
+
+
+    /**
+     * 更多页面-导航子页面-获取导航数据
+     *
+     * @return 数据实体
+     */
+    @GET("navi/json")
+    fun getNaviData():Observable<BaseRequest<MutableList<NaviModel>>>
+
+
+    /**
+     * 更多页面-体系子页面-获取体系数据
+     *
+     * @return 数据实体
+     */
+    @GET("tree/json")
+    fun getSystemData():Observable<BaseRequest<MutableList<SystemBean>>>
 }

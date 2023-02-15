@@ -19,10 +19,10 @@
 
         <meta-data
             android:name="design_width_in_dp"
-            android:value="360" />
+            android:value="375" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="640" />
+            android:value="667" />
 
 
         <activity

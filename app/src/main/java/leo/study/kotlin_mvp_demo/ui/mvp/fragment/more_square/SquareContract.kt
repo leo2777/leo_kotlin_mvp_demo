@@ -35,6 +35,10 @@ interface SquareContract {
 
 
     interface Presenter:IPresenter<View,Model>{
+
+        fun getData()
+
+
         /**
          * 刷新
          *

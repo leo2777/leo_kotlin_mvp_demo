@@ -59,11 +59,13 @@ class SquareFragment : BaseMvpFragment<
         })
 
         binding.recMoreSquareArticlesList.adapter = this.adapter
+
+
+        page = pageFirst
+        presenter.getData()
     }
 
     override fun lazyLoad() {
-        page = pageFirst
-        presenter.refresh()
     }
 
 

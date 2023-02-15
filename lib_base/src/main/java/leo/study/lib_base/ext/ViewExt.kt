@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -38,7 +39,6 @@ val Context.screenHeightDp: Int get() = screenHeightPx.px2dp(this)
 fun View.onClick(click: () -> Unit) {
     this.apply { setOnClickListener { click() } }
 }
-fun Context.getColorCompat(color: Int) = ContextCompat.getColor(this, color)
 
 /**
  * View 长按事件

@@ -7,4 +7,35 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+
+
+    <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+
+
+
+    <color name="color_white">#ffffff</color>
+
+    <color name="color_theme">#BB86FC</color>
+    <color name="color_default_bg">#ECECEC</color>
+    <color name="transparent_bg_color">#00ffffff</color>
+
+    <color name="color_red_f44366">#F44336</color>
+    <color name="color_purple_b184ea">#B184EA</color>
+
+
+
+    <color name="color_r0_BB86FC">#BB86FC</color>
+    <color name="color_r1_FF5722">#FF5722</color>
+    <color name="color_r2_F44336">#F44336</color>
+    <color name="color_r3_03A9F4">#03A9F4</color>
+    <color name="color_r4_FFEB3B">#FFEB3B</color>
+    <color name="color_r5_4CAF50">#4CAF50</color>
+    <color name="color_r6_FF9800">#FF9800</color>
+    <color name="color_r7_3F51B5">#3F51B5</color>
+    <color name="color_r8_089282">#089282</color>
+    <color name="color_r9_CDDC39">#CDDC39</color>
 </resources>

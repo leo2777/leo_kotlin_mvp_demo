@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal">
+    android:orientation="vertical">
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_more_child_fragment"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         app:tabIndicatorFullWidth="false"
+        android:background="@color/color_default_bg"
         app:tabUnboundedRipple="true"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
         app:tabGravity="center"
@@ -17,11 +18,11 @@
         app:tabTextColor="@color/color_333333"
         app:tabSelectedTextColor="@color/color_theme"
         app:tabIndicatorGravity="bottom"
-        app:tabIndicatorColor="@color/color_theme"
-        android:background="@color/white"/>
+        app:tabIndicatorColor="@color/color_theme"/>
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_more_child_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        android:overScrollMode="never"/>
 </LinearLayout>

@@ -21,6 +21,11 @@ class SquarePresenter:BasePresenter<SquareContract.View>(),SquareContract.Presen
 
     override var model: SquareContract.Model? = SquareModel()
 
+    override fun getData() {
+        model?.getArticles(0)?.leoSubscribe(view,model,true) {
+            view?.onResult(it.data)
+        }
+    }
 
     override fun refresh() {
         model?.getArticles(0)?.leoSubscribe(view,model) {

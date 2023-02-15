@@ -75,7 +75,6 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
      * 设置状态栏 actionBar
      */
     private fun setStatesBar() {
-        StatusBarUtils.setColor(this,ContextCompat.getColor(this,R.color.color_theme),0)
     }
 
     override fun startActivity(intent: Intent?) {
