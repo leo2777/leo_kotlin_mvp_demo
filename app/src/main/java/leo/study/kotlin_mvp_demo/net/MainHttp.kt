@@ -1,24 +1,21 @@
 package leo.study.kotlin_mvp_demo.net
 
-import android.widget.Toast
 import com.google.gson.JsonParseException
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import leo.study.kotlin_mvp_demo.app.BaseApplication
 import leo.study.kotlin_mvp_demo.common.BaseRequest
-import leo.study.lib_base.base.BaseActivity
-import leo.study.lib_base.http.constant.CodeStatus
+import leo.study.kotlin_mvp_demo.ui.mvp.activity.login_or_register.LoginOrRegisterActivity
+import leo.study.lib_base.ext.goActivity
+import leo.study.lib_base.ext.showError
+import leo.study.lib_base.ext.showLogD
+import leo.study.lib_base.ext.showLogE
 import leo.study.lib_base.mvp.IModel
 import leo.study.lib_base.mvp.ITopView
 import leo.study.lib_base.scheduler.SchedulerUtils
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import leo.study.lib_base.ext.showError
-import leo.study.lib_base.ext.showLogD
-import leo.study.lib_base.ext.showLogE
-import leo.study.lib_base.ext.showLogI
 
 
 /**
@@ -38,25 +35,29 @@ import leo.study.lib_base.ext.showLogI
 fun <T : Any> Observable<T>.leoSubscribe(
     iBaseView: ITopView? = null,
     iModel: IModel? = null,
-    isShowLoad:Boolean = false,
+    isShowLoad: Boolean = false,
     msg: String = "",
     onSuccess: (T) -> Unit
 ) {
     this.compose(SchedulerUtils.ioToMain())
-        .subscribe(object : Observer<T>{
+        .subscribe(object : Observer<T> {
             override fun onSubscribe(d: Disposable) {
                 iModel?.disposablePool?.add(d)
-                if (isShowLoad)iBaseView?.showLoading((msg.ifEmpty { "请求中···" }),false)
+                if (isShowLoad) iBaseView?.showLoading((msg.ifEmpty { "请求中···" }), false)
             }
+
             override fun onNext(t: T) {
                 val bean = t as BaseRequest<*>
-                when(bean.errorCode){
+                when (bean.errorCode) {
                     CodeStatus.SUCCESS_CODE -> {
                         showLogD("请求成功，数据返回：$bean")
                         onSuccess.invoke(t)
                     }
-                    CodeStatus.FAIL_CODE ->{
-                        if (bean.errorMsg.isEmpty()){
+                    CodeStatus.NO_LOGIN_CODE -> {
+                        iBaseView?.getCtx()?.goActivity<LoginOrRegisterActivity>()
+                    }
+                    else -> {
+                        if (bean.errorMsg.isEmpty()) {
                             showLogE("请求成功，返回数据错误！")
                             iBaseView?.getCtx()?.showError("请求成功，返回数据错误！")
                             return
@@ -67,6 +68,7 @@ fun <T : Any> Observable<T>.leoSubscribe(
 
                 }
             }
+
             override fun onError(e: Throwable) {
                 iBaseView?.dismissLoading()
 
@@ -86,8 +88,45 @@ fun <T : Any> Observable<T>.leoSubscribe(
                 }
 
             }
+
             override fun onComplete() {
                 iBaseView?.dismissLoading()
+            }
+        })
+}
+
+
+/**
+ * 不请求网络的 线程调度
+ *
+ * @param T           返回数据实体
+ * @param iBaseView   绑定的view 不能省略
+ * @param isShowLoad  是否显示加载框
+ * @param msg         加载框显示信息
+ * @param onSuccess   成功返回接口
+ */
+fun <T : Any> Observable<T>.resultSubscribe(
+    iBaseView: ITopView,
+    isShowLoad: Boolean = false,
+    msg: String = "",
+    onSuccess: (T) -> Unit
+) {
+    this.compose(SchedulerUtils.ioToMain())
+        .subscribe(object : Observer<T> {
+            override fun onSubscribe(d: Disposable) {
+                if (isShowLoad) iBaseView.showLoading((msg.ifEmpty { "请求中···" }), false)
+            }
+
+            override fun onNext(t: T) {
+                onSuccess.invoke(t)
+            }
+
+            override fun onError(e: Throwable) {
+                iBaseView.getCtx()?.showError(e.message.toString())
+            }
+
+            override fun onComplete() {
+                iBaseView.dismissLoading()
             }
         })
 }

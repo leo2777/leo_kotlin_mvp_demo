@@ -13,3 +13,6 @@ package leo.study.lib_base
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
+
+class Test{
+}

@@ -3,9 +3,7 @@ package leo.study.kotlin_mvp_demo.net
 import io.reactivex.Observable
 import leo.study.kotlin_mvp_demo.beans.*
 import leo.study.kotlin_mvp_demo.common.BaseRequest
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 /**
@@ -88,9 +86,6 @@ interface MainServiceApi {
 //==================================================================================================
 
 
-
-
-
     /**
      * 获取公众号分类数据（作者）
      *
@@ -114,8 +109,6 @@ interface MainServiceApi {
     ): Observable<BaseRequest<ArticlePage>>
 
 
-
-
 //==================================================================================================
 
 
@@ -126,7 +119,7 @@ interface MainServiceApi {
      * @return 数据实体
      */
     @GET("user_article/list/{page}/json")
-    fun getSquareArticles(@Path("page") page:Int):Observable<BaseRequest<ArticlePage>>
+    fun getSquareArticles(@Path("page") page: Int): Observable<BaseRequest<ArticlePage>>
 
 
     /**
@@ -135,7 +128,7 @@ interface MainServiceApi {
      * @return 数据实体
      */
     @GET("navi/json")
-    fun getNaviData():Observable<BaseRequest<MutableList<NaviModel>>>
+    fun getNaviData(): Observable<BaseRequest<MutableList<NaviModel>>>
 
 
     /**
@@ -144,5 +137,40 @@ interface MainServiceApi {
      * @return 数据实体
      */
     @GET("tree/json")
-    fun getSystemData():Observable<BaseRequest<MutableList<SystemBean>>>
+    fun getSystemData(): Observable<BaseRequest<MutableList<SystemBean>>>
+
+
+    //==============================================================================================
+
+
+    /**
+     * 登录接口
+     *
+     * @param name 名字
+     * @param password 密码
+     * @return
+     */
+    @POST("user/login")
+    @FormUrlEncoded
+    fun login(
+        @Field("username") name: String,
+        @Field("password") password: String
+    ): Observable<BaseRequest<LoginAndRegisterBean>>
+
+
+    /**
+     * 注册
+     *
+     * @param name 名字
+     * @param password 密码
+     * @param rePassword 确定密码
+     * @return
+     */
+    @POST("user/register")
+    @FormUrlEncoded
+    fun register(
+        @Field("username") name: String,
+        @Field("password") password: String,
+        @Field("repassword") rePassword: String
+    ): Observable<BaseRequest<LoginAndRegisterBean>>
 }

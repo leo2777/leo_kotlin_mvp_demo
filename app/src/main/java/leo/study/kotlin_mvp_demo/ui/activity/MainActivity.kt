@@ -2,16 +2,19 @@ package leo.study.kotlin_mvp_demo.ui.activity
 
 import android.view.MenuItem
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.navigation.NavigationBarView
+import kotlinx.coroutines.launch
 import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.databinding.ActivityMainBinding
 import leo.study.kotlin_mvp_demo.ui.fragment.MoreFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.project.ProjectFragment
-import leo.study.kotlin_mvp_demo.ui.mvp.fragment.more_square.SquareFragment
-import leo.study.kotlin_mvp_demo.ui.fragment.UserFragment
+import leo.study.kotlin_mvp_demo.ui.mvp.fragment.user.UserFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.wechat.WeChatFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeFragment
 import leo.study.lib_base.base.BaseActivity
+import leo.study.lib_base.ext.dataStoreGet
+import leo.study.lib_base.ext.dataStorePut
 
 //首页
 class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnItemSelectedListener {
@@ -41,11 +44,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnIt
         showFragment(index)
 
 
+        var name = 0
+        lifecycleScope.launch {
+            name = context.dataStoreGet("name")
+        }
+
+
+
+
+
 //        startActivity<KotlinTestActivity>()
-    }
-
-    override fun initData() {
-
     }
 
     /**

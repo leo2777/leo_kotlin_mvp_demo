@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
 import leo.study.kotlin_mvp_demo.databinding.FragmentMoreBinding
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.more_navigation.NavigationFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.more_square.SquareFragment
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.more_system.SystemFragment
 import leo.study.lib_base.base.BaseFragment
+import leo.study.lib_base.ext.dataStoreGet
 
 
 /**
@@ -25,18 +28,19 @@ import leo.study.lib_base.base.BaseFragment
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
-class MoreFragment:BaseFragment<FragmentMoreBinding>() {
+class MoreFragment : BaseFragment<FragmentMoreBinding>() {
 
-    private val tabName:List<String> = listOf("广场","导航","体系")
-    private val fragments:List<Fragment> = listOf(SquareFragment(),NavigationFragment(),SystemFragment())
-    private var layoutMediator:TabLayoutMediator ?= null
+    private val tabName: List<String> = listOf("广场", "导航", "体系")
+    private val fragments: List<Fragment> =
+        listOf(SquareFragment(), NavigationFragment(), SystemFragment())
+    private var layoutMediator: TabLayoutMediator? = null
 
 
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentMoreBinding {
-        return FragmentMoreBinding.inflate(inflater,container,false)
+        return FragmentMoreBinding.inflate(inflater, container, false)
     }
 
     override fun onDestroyView() {
@@ -45,6 +49,15 @@ class MoreFragment:BaseFragment<FragmentMoreBinding>() {
     }
 
     override fun initView(view: View) {
+
+
+        var name: String = ""
+        lifecycleScope.launch {
+            name = requireContext().dataStoreGet("name")
+        }
+
+
+
         binding.vpMoreChildFragment.adapter = (object : FragmentStateAdapter(this) {
             override fun createFragment(position: Int): Fragment {
                 return fragments[position]

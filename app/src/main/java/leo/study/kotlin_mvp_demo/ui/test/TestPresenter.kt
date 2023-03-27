@@ -1,17 +1,10 @@
 package leo.study.kotlin_mvp_demo.ui.test
 
 import android.annotation.SuppressLint
-import android.util.Log.e
-import com.google.gson.JsonParseException
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import leo.study.lib_base.http.constant.CodeStatus
 import leo.study.lib_base.mvp.BasePresenter
 import leo.study.lib_base.scheduler.SchedulerUtils
-import java.net.ConnectException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
-import java.util.logging.Logger
 
 
 /**

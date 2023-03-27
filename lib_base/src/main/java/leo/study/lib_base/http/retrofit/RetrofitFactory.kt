@@ -1,9 +1,11 @@
 package leo.study.lib_base.http.retrofit
 
+import android.content.Context
 import android.util.Log.e
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import leo.study.lib_base.ext.showLogD
+import okhttp3.CookieJar
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -49,6 +51,7 @@ abstract class RetrofitFactory<T>() {
         val httpClient = OkHttpClient.Builder()
             .dispatcher(dispatcher)
             .addInterceptor(this.setLoggingInterceptor())
+            .cookieJar(if (this.isCookiesSave()) DataStoreCookieJar(this.getContext()) else CookieJar.NO_COOKIES)
             .addInterceptor { chain ->
                 var builder = chain.request().newBuilder()
                 builder.addHeader("Cache-Control", "max-age=0")
@@ -80,6 +83,10 @@ abstract class RetrofitFactory<T>() {
      * 设置地址
      */
     abstract fun setBaseUrl():String
+
+    abstract fun isCookiesSave():Boolean
+
+    abstract fun getContext(): Context
 
     /**
      * 设置头部

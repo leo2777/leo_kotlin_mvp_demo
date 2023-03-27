@@ -1,7 +1,9 @@
 package leo.study.kotlin_mvp_demo.net
 
+import android.content.Context
 import android.util.Log
 import leo.study.kotlin_mvp_demo.constants.Constants
+import leo.study.lib_base.base.BaseApplication
 import leo.study.lib_base.ext.showLogD
 import leo.study.lib_base.http.retrofit.RetrofitFactory
 import okhttp3.Request
@@ -31,8 +33,15 @@ class MainRetrofit : RetrofitFactory<MainServiceApi>() {
         return Constants.mainUrl
     }
 
+    override fun isCookiesSave(): Boolean {
+        return true
+    }
+
+    override fun getContext(): Context {
+        return BaseApplication.getAppContext()
+    }
+
     override fun setHeader(builder: Request.Builder): Request.Builder {
-        builder.addHeader("token","")
         return builder
     }
 

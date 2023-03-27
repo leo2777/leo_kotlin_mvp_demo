@@ -3,6 +3,7 @@ package leo.study.lib_base.ext
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
@@ -41,28 +42,19 @@ import java.io.File
  * 跳转
  */
 
-/**
- * 不带参数跳转Activity  如：startActivity<TestActivity>()
- *
- * @param [T] 跳转的Activity
- */
-inline fun <reified T : Activity> Context.startActivity() {
-    let {
-        val intent = Intent(this, T::class.java)
-        it.startActivity(intent)
-    }
-}
 
 /**
  * 带参数跳转的Activity  如：startActivity<TestActivity>()
  *
  * @param [T]跳转的Activity
- * @param [data]携带的数据
+ * @param [data]携带的数据  可为空
  */
-inline fun <reified T : Activity> Context.startActivity(data: Bundle) {
+inline fun <reified T : Activity> Context.goActivity(data : Bundle?=null) {
     let {
         val intent = Intent(this, T::class.java)
-        intent.putExtras(data)
+        if (data != null){
+            intent.putExtras(data)
+        }
         it.startActivity(intent)
     }
 }

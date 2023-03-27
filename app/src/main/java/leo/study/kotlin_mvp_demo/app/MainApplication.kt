@@ -1,18 +1,16 @@
 package leo.study.kotlin_mvp_demo.app
 
-import android.app.Application
-import android.content.Context
 import android.view.Gravity
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.BezierRadarHeader
-import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import es.dmoral.toasty.Toasty
 import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.common.GlideLoaderProcessor
 import leo.study.kotlin_mvp_demo.common.LoggerAdapter
+import leo.study.lib_base.base.BaseApplication
 import leo.study.lib_base.image.ImageLoaderHelper
 import leo.study.lib_base.image.ImageOptions
 
@@ -29,39 +27,17 @@ import leo.study.lib_base.image.ImageOptions
  *this developer QQ is 2549732107
  * ***********************************************************************
  */
-class BaseApplication : Application() {
+class MainApplication : BaseApplication() {
 
     private val tag: String = "leo_kotlin_mvp_demo"
 
-    companion object {
-        var context:BaseApplication? = null
-        /**
-         * 返回项目的 context
-         *
-         * @return context
-         */
-        fun getAppContext(): Context {
-            return context!!
-        }
-    }
+
+    override var dataStoreName: String = "leo_kt_dataStoreName"
+    override var sharedPrfName: String = "leo_kt_sharePrfName"
 
 
+    override fun init() {
 
-    override fun onCreate() {
-        super.onCreate()
-
-        context = this;
-
-        init()
-    }
-
-
-
-    /**
-     * 初始化
-     *
-     */
-    private fun init() {
         //初始化logger
         initLogger()
         //初始化toasty
@@ -70,7 +46,6 @@ class BaseApplication : Application() {
         initImage()
         //初始化 智能刷新
         initSmartRefresh()
-
     }
 
 

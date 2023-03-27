@@ -1,4 +1,4 @@
-package leo.study.lib_base.http.constant
+package leo.study.kotlin_mvp_demo.net
 
 
 /**
@@ -15,7 +15,7 @@ package leo.study.lib_base.http.constant
  */
 object CodeStatus {
     const val SUCCESS_CODE = 0
-    const val FAIL_CODE = 400
+    const val NO_LOGIN_CODE = -1001
 
 
 }

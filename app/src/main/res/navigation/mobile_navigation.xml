@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="leo.study.kotlin_mvp_demo.ui.fragment.UserFragment"
+        android:name="leo.study.kotlin_mvp_demo.ui.mvp.fragment.user.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_user" />
 </navigation>

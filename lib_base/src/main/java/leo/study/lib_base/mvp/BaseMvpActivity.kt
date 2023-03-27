@@ -19,7 +19,11 @@ abstract class BaseMvpActivity<T:ViewBinding,V : ITopView, P : ITopPresenter> : 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initEnd()
+        initData()
     }
+
+
+    abstract fun initData()
 
     override fun getCtx() = this
 

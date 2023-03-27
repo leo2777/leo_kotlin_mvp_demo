@@ -53,7 +53,6 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
 
     abstract fun initView()
-    abstract fun initData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
@@ -68,7 +67,6 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         progressDialog = ProgressDialogUtils(this, R.style.commonDialogStyle)
         onSetContentViewNext(savedInstanceState)
         ActivityUtils.pushActivity(this)
-        initData()
     }
 
     /**
