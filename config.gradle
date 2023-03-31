@@ -116,7 +116,7 @@ ext {
             flexBoxLayout               : "com.google.android.flexbox:flexbox:$version.flexBoxLayout",
             // 本地储存 dataStore (替换sp)
             dataStore                  : "androidx.datastore:datastore-preferences:$version.dataStore",
-            dataStoreCore              : "androidx.datastore:datastore-preferences-core::$version.dataStore",
+            dataStoreCore              : "androidx.datastore:datastore-preferences-core:$version.dataStore",
     ]
 
 }

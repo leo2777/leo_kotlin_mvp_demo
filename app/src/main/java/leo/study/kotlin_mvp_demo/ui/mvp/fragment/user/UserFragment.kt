@@ -1,27 +1,94 @@
 package leo.study.kotlin_mvp_demo.ui.mvp.fragment.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import leo.study.kotlin_mvp_demo.R
+import leo.study.kotlin_mvp_demo.beans.UserInfoBean
 import leo.study.kotlin_mvp_demo.databinding.FragmentUserBinding
-import leo.study.lib_base.base.BaseFragment
+import leo.study.kotlin_mvp_demo.ui.mvp.activity.login_or_register.LoginOrRegisterActivity
+import leo.study.lib_base.ext.load
+import leo.study.lib_base.ext.showLogE
+import leo.study.lib_base.ext.startActivity
+import leo.study.lib_base.mvp.BaseMvpFragment
 
 
-class UserFragment : BaseFragment<FragmentUserBinding>() {
+class UserFragment : BaseMvpFragment<FragmentUserBinding, Contract.View, Contract.Presenter>(),
+    Contract.View, OnClickListener {
+
+
+    override var presenter: Contract.Presenter = Presenter()
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentUserBinding {
-        return FragmentUserBinding.inflate(inflater,container,false)
+        return FragmentUserBinding.inflate(inflater, container, false)
     }
 
+    override fun onEveryResume() {
+        super.onEveryResume()
+        presenter.getIsLogin()
+    }
+
+
     override fun initView(view: View) {
+        binding.linMyGrade.setOnClickListener(this)
+        binding.linMyCollect.setOnClickListener(this)
+        binding.linMyShare.setOnClickListener(this)
+        binding.linSetting.setOnClickListener(this)
+        binding.linMyAbout.setOnClickListener(this)
+        binding.linNoLogin.setOnClickListener(this)
+        binding.btnLogin.setOnClickListener(this)
+
+
     }
 
     override fun lazyLoad() {
+    }
+    override fun onUserInfoResult(result: UserInfoBean) {
+        result.run {
+            binding.imgUserHead.load(this.userInfo.icon)
+            binding.tvMeId.text = this.userInfo.id.toString()
+            binding.tvMeLevel.text= "等级：${this.coinInfo.level}"
+            binding.tvMeName.text = this.userInfo.nickname
+            binding.tvMeRank.text="排名：${this.coinInfo.rank}"
+            binding.tvMyGrade.text = this.userInfo.coinCount.toString()
+        }
+    }
+
+    override fun onIsLogin(login: Boolean) {
+        if (login){
+            binding.linNoLogin.visibility = GONE
+            presenter.getUserInfo()
+        }else{
+            binding.linNoLogin.visibility = VISIBLE
+        }
+
+    }
+
+    override fun onClick(view: View?) {
+        view ?: return
+        when (view.id) {
+            R.id.lin_my_about -> {
+            }
+            R.id.lin_my_collect -> {
+
+            }
+            R.id.lin_setting -> {
+
+            }
+            R.id.lin_my_share -> {
+
+            }
+            R.id.lin_my_grade -> {
+
+            }
+            R.id.btn_login -> requireContext().startActivity<LoginOrRegisterActivity>()
+        }
     }
 
 }

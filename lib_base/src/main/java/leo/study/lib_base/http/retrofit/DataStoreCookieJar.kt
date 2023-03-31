@@ -25,32 +25,38 @@ import okhttp3.HttpUrl
  */
 class DataStoreCookieJar(private val context:Context):CookieJar {
 
-    companion object {
-        private const val PREFS_COOKIE_NAMES = "CookieNames"
-    }
+
+    private val cookiePrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
+        val prefsEditor = cookiePrefs.edit()
         val cookieNames = HashSet<String>()
 
-        MainScope().launch{
-            for (cookie in cookies){
-                context.dataStorePut(cookie.name(),cookie.toString())
-                cookieNames.add(cookie.name())
-            }
-            context.dataStorePut(PREFS_COOKIE_NAMES,cookieNames.toString())
+        for (cookie in cookies) {
+            prefsEditor.putString(cookie.name(), cookie.toString())
+            cookieNames.add(cookie.name())
         }
+
+        prefsEditor.putStringSet(PREFS_COOKIE_NAMES, cookieNames)
+        prefsEditor.apply()
     }
 
-    override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
+    override fun loadForRequest(url: HttpUrl): ArrayList<Cookie> {
+        val cookieNames = cookiePrefs.getStringSet(PREFS_COOKIE_NAMES, HashSet())
+
         val cookies = ArrayList<Cookie>()
-        MainScope().launch {
-            val cookieNames:HashSet<Char> = context.dataStoreGet<String>(PREFS_COOKIE_NAMES).toHashSet()
-            for (name in cookieNames){
-                val encodedCookie = context.dataStoreGet<String>(name.toString())
-                val cookie = Cookie.parse(url,encodedCookie) ?: continue
-                cookies.add(cookie)
-            }
+        cookieNames?:return cookies
+        for (name in cookieNames) {
+            val encodedCookie = cookiePrefs.getString(name, null) ?: continue
+            val cookie = Cookie.parse(url, encodedCookie) ?: continue
+            cookies.add(cookie)
         }
+
         return cookies
+    }
+
+    companion object {
+        private const val PREFS_NAME = "CookiePrefs"
+        private const val PREFS_COOKIE_NAMES = "CookieNames"
     }
 }

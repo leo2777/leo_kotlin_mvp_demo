@@ -9,7 +9,6 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.databinding.FragmentWeChatArticleBinding
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeArticleAdapter
-import leo.study.kotlin_mvp_demo.ui.mvp.fragment.project_article.ProjectArticleAdapter
 import leo.study.lib_base.ext.showError
 import leo.study.lib_base.mvp.BaseMvpFragment
 

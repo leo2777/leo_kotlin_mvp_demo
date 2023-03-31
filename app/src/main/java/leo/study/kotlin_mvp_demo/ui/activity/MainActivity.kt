@@ -15,6 +15,7 @@ import leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeFragment
 import leo.study.lib_base.base.BaseActivity
 import leo.study.lib_base.ext.dataStoreGet
 import leo.study.lib_base.ext.dataStorePut
+import leo.study.lib_base.ext.startActivity
 
 //首页
 class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnItemSelectedListener {
@@ -46,10 +47,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationBarView.OnIt
 
         var name = 0
         lifecycleScope.launch {
-            name = context.dataStoreGet("name")
+//            name = context.dataStoreGet("name")
         }
-
-
 
 
 

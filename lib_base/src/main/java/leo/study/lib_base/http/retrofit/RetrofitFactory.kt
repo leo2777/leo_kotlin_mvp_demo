@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log.e
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import leo.study.lib_base.ext.showLogD
 import okhttp3.CookieJar
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient

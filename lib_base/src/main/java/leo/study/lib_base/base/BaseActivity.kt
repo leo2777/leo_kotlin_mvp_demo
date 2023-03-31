@@ -75,9 +75,6 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     private fun setStatesBar() {
     }
 
-    override fun startActivity(intent: Intent?) {
-        super.startActivity(intent)
-    }
 
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

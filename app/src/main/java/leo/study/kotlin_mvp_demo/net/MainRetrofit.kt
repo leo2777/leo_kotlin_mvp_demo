@@ -4,11 +4,9 @@ import android.content.Context
 import android.util.Log
 import leo.study.kotlin_mvp_demo.constants.Constants
 import leo.study.lib_base.base.BaseApplication
-import leo.study.lib_base.ext.showLogD
 import leo.study.lib_base.http.retrofit.RetrofitFactory
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
-import java.util.logging.Logger
 
 
 /**

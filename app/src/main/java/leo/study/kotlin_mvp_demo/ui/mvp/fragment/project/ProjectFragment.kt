@@ -10,7 +10,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import leo.study.kotlin_mvp_demo.beans.ArticleCategory
 import leo.study.kotlin_mvp_demo.databinding.FragmentProjectBinding
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.project_article.ProjectArticleFragment
-import leo.study.lib_base.ext.showLogD
 import leo.study.lib_base.mvp.BaseMvpFragment
 
 /**

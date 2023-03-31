@@ -173,4 +173,13 @@ interface MainServiceApi {
         @Field("password") password: String,
         @Field("repassword") rePassword: String
     ): Observable<BaseRequest<LoginAndRegisterBean>>
+
+
+
+
+//==================================================================================================
+
+
+    @GET("/user/lg/userinfo/json")
+    fun getUserInfo():Observable<BaseRequest<UserInfoBean>>
 }

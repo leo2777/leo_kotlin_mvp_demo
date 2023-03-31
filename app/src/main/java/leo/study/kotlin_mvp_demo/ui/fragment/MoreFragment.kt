@@ -51,10 +51,10 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
     override fun initView(view: View) {
 
 
-        var name: String = ""
-        lifecycleScope.launch {
-            name = requireContext().dataStoreGet("name")
-        }
+//        var name: String = ""
+//        lifecycleScope.launch {
+//            name = requireContext().dataStoreGet("name")
+//        }
 
 
 

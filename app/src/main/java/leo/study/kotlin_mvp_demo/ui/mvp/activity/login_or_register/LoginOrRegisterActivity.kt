@@ -2,9 +2,13 @@ package leo.study.kotlin_mvp_demo.ui.mvp.activity.login_or_register
 
 import android.view.View
 import android.view.View.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.beans.LoginAndRegisterBean
+import leo.study.kotlin_mvp_demo.constants.Constants
 import leo.study.kotlin_mvp_demo.databinding.ActivityLoginOrRegisterBinding
+import leo.study.lib_base.ext.dataStorePut
 import leo.study.lib_base.mvp.BaseMvpActivity
 
 class LoginOrRegisterActivity :
@@ -31,10 +35,23 @@ class LoginOrRegisterActivity :
     }
 
     override fun onLoginResult(bean: LoginAndRegisterBean) {
+        MainScope().launch {
+            dataStorePut(Constants.IS_LOGIN,true)
+            bean.run {
+
+            }
+        }
+
         binding.tvBack.performClick()
     }
 
     override fun onRegisterResult(bean: LoginAndRegisterBean) {
+        MainScope().launch {
+            dataStorePut(Constants.IS_LOGIN,true)
+            bean.run {
+
+            }
+        }
         binding.tvBack.performClick()
     }
 

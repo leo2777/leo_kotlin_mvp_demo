@@ -4,12 +4,12 @@ import com.google.gson.JsonParseException
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import leo.study.kotlin_mvp_demo.common.BaseRequest
+import leo.study.kotlin_mvp_demo.constants.Constants
 import leo.study.kotlin_mvp_demo.ui.mvp.activity.login_or_register.LoginOrRegisterActivity
-import leo.study.lib_base.ext.goActivity
-import leo.study.lib_base.ext.showError
-import leo.study.lib_base.ext.showLogD
-import leo.study.lib_base.ext.showLogE
+import leo.study.lib_base.ext.*
 import leo.study.lib_base.mvp.IModel
 import leo.study.lib_base.mvp.ITopView
 import leo.study.lib_base.scheduler.SchedulerUtils
@@ -54,7 +54,11 @@ fun <T : Any> Observable<T>.leoSubscribe(
                         onSuccess.invoke(t)
                     }
                     CodeStatus.NO_LOGIN_CODE -> {
-                        iBaseView?.getCtx()?.goActivity<LoginOrRegisterActivity>()
+                        MainScope().launch {
+                            iBaseView?.getCtx()?.dataStorePut(Constants.IS_LOGIN,false)
+                        }
+                        iBaseView?.getCtx()?.startActivity<LoginOrRegisterActivity>()
+//                        iBaseView?.getCtx()?.startActivity(Intent(iBaseView.getCtx(),LoginOrRegisterActivity::class.java))
                     }
                     else -> {
                         if (bean.errorMsg.isEmpty()) {

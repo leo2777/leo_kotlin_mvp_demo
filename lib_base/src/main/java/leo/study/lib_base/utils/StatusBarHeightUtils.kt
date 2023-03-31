@@ -93,17 +93,15 @@ object StatusBarHeightUtils {
      * @return 高度值
      */
     private fun xiaomiGetStatusBarHeight(context: Context): Int {
-        var result = 0
         val resourceId = context.resources.getIdentifier(
             "notch_height",
             "dimen", "android"
         )
-        result = if (resourceId > 0) {
+        return if (resourceId > 0) {
             context.resources.getDimensionPixelSize(resourceId)
         } else {
             defaultGetStatusBarHeight(context)
         }
-        return result
     }
 
     /**
@@ -113,15 +111,12 @@ object StatusBarHeightUtils {
      * @return
      */
     private fun MeiZuGetStatusBarHeight(context: Context): Int {
-        var result = 0
         val fhid = context.resources.getIdentifier("fringe_height", "dimen", "android")
-        result = if (fhid > 0) {
+        return if (fhid > 0) {
             context.resources.getDimensionPixelSize(fhid)
         } else {
             defaultGetStatusBarHeight(context)
         }
-        Log.e("333333", "statusBarHeight : meizu$result")
-        return result
     }
 
 

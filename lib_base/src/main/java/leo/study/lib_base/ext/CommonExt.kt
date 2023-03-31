@@ -6,14 +6,10 @@ import android.content.Intent
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.DrawableRes
-import androidx.annotation.Nullable
 import androidx.annotation.StringRes
 import com.orhanobut.logger.Logger
-import com.orhanobut.logger.Logger.ERROR
 import es.dmoral.toasty.Toasty
-import leo.study.lib_base.ext.px2dp
 import leo.study.lib_base.image.ImageLoaderHelper
 import java.io.File
 
@@ -34,7 +30,6 @@ import java.io.File
 //TODO: kotlin 公用 扩展函数 工具类，后续项目开发需要增加相对应的扩展函数。
 
 
-
 //=================================================================================================
 
 
@@ -44,19 +39,25 @@ import java.io.File
 
 
 /**
- * 带参数跳转的Activity  如：startActivity<TestActivity>()
+ * 带参数跳转的Activity  如：startAct<TestActivity>()
  *
- * @param [T]跳转的Activity
- * @param [data]携带的数据  可为空
+ * @param [A]       跳转的Activity
+ * @param [data]    携带的数据  可为空
  */
-inline fun <reified T : Activity> Context.goActivity(data : Bundle?=null) {
-    let {
-        val intent = Intent(this, T::class.java)
-        if (data != null){
-            intent.putExtras(data)
-        }
-        it.startActivity(intent)
+inline fun <reified A : Activity> Context.startActivity(
+    data: Bundle? = null,
+    requestCode: Int? = 0
+) {
+    val intent = Intent(this, A::class.java)
+    if (data != null) {
+        intent.putExtras(data)
     }
+    if (requestCode != 0) {
+        requestCode?.let { (this as Activity).startActivityForResult(intent, it) }
+    } else {
+        this.startActivity(intent)
+    }
+
 }
 
 
@@ -180,35 +181,40 @@ fun Context.showNormal(@StringRes idRes: Int, duration: Int) {
 fun showLogE(content: String) {
     Logger.e(content)
 }
-fun showLogE(tag:String,content: String) {
+
+fun showLogE(tag: String, content: String) {
     Logger.t(tag).e(content)
 }
 
 fun showLogI(content: String) {
     Logger.i(content)
 }
-fun showLogI(tag:String,content: String) {
+
+fun showLogI(tag: String, content: String) {
     Logger.t(tag).i(content)
 }
 
 fun showLogV(content: String) {
     Logger.v(content)
 }
-fun showLogV(tag:String,content: String) {
+
+fun showLogV(tag: String, content: String) {
     Logger.t(tag).v(content)
 }
 
 fun showLogD(content: String) {
     Logger.d(content)
 }
-fun showLogD(tag:String,content: String) {
+
+fun showLogD(tag: String, content: String) {
     Logger.t(tag).d(content)
 }
 
 fun showLogW(content: String) {
     Logger.w(content)
 }
-fun showLogW(tag:String,content: String) {
+
+fun showLogW(tag: String, content: String) {
     Logger.t(tag).w(content)
 }
 

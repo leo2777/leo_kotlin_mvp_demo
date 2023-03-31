@@ -49,6 +49,14 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     protected abstract fun initView(view: View)
     protected abstract fun lazyLoad()
 
+    /**
+     * 每次显示回调
+     *  注意：宿主Activity 必须是 调用 show/hide ,而不能是 replace,否则需要自己实现。
+     *
+     *  */
+    protected open fun onEveryResume(){}
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,7 +83,17 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
             lazyLoad()
             isLazyLoad = true
         }
+        if (!isHidden){
+            onEveryResume()
+        }
 
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden){
+            onEveryResume()
+        }
     }
 
 

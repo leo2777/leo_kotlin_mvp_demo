@@ -18,4 +18,9 @@ object Constants {
     //主请求地址
     const val mainUrl : String = "https://www.wanandroid.com/"
 
+
+
+    //持久化数据 保存key
+
+    const val IS_LOGIN:String = "is_login"
 }
