@@ -1,6 +1,7 @@
 package leo.study.kotlin_mvp_demo.ui.mvp.fragment.more_system
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.beans.SystemBean
 import leo.study.kotlin_mvp_demo.beans.SystemChildrenBean
 import leo.study.kotlin_mvp_demo.databinding.FragmentSystemBinding
+import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
+import leo.study.lib_base.ext.startActivity
 import leo.study.lib_base.mvp.BaseMvpFragment
 
 
@@ -106,6 +109,7 @@ class SystemFragment :
             }
 
         })
+
 
         binding.recMoreSystemCategoryList.adapter = this.adapter
     }

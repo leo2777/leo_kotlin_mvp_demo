@@ -14,7 +14,9 @@ import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.beans.BannerModel
 import leo.study.lib_base.mvp.BaseMvpFragment
 import leo.study.kotlin_mvp_demo.databinding.FragmentHomeBinding
+import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
 import leo.study.lib_base.ext.load
+import leo.study.lib_base.ext.startActivity
 
 /**
  * 首页
@@ -92,6 +94,13 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContract.View,
 
     private fun setRvAdapter() {
         binding.recHomeList.adapter = homeAdapter
+
+        homeAdapter.setOnItemClickListener{ _,_,position ->
+            val bundle = Bundle()
+            bundle.putString("url",homeAdapter.getItem(position)?.link)
+            bundle.putString("name",homeAdapter.getItem(position)?.title)
+            requireContext().startActivity<CommonWebViewActivity>(bundle)
+        }
     }
 
 
@@ -113,7 +122,10 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContract.View,
                 holder.imageView.scaleType = ImageView.ScaleType.FIT_XY
                 holder.imageView.load(data.imagePath)
                 holder.itemView.setOnClickListener {
-                    //todo:这里后续需要完善 跳转网页显示的 Activity
+                    val bundle = Bundle()
+                    bundle.putString("url",data.url)
+                    bundle.putString("name",data.title)
+                    requireContext().startActivity<CommonWebViewActivity>(bundle)
                 }
             }
         })

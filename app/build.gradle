@@ -62,6 +62,8 @@ dependencies {
     implementation rootProject.ext.dependencies.smart_refresh_food_ball
     implementation rootProject.ext.dependencies.smart_refresh_food_classics
 
+    implementation rootProject.ext.dependencies.agentWeb
+
 
 
 }

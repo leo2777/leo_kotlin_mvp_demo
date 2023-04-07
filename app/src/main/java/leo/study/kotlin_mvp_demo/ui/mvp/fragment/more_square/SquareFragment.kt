@@ -10,7 +10,9 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.databinding.FragmentSquareBinding
+import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeArticleAdapter
+import leo.study.lib_base.ext.startActivity
 import leo.study.lib_base.mvp.BaseMvpFragment
 
 
@@ -60,6 +62,12 @@ class SquareFragment : BaseMvpFragment<
 
         binding.recMoreSquareArticlesList.adapter = this.adapter
 
+        adapter.setOnItemClickListener{ _,_,position ->
+            val bundle = Bundle()
+            bundle.putString("url",adapter.getItem(position)?.link)
+            bundle.putString("name",adapter.getItem(position)?.title)
+            requireContext().startActivity<CommonWebViewActivity>(bundle)
+        }
 
         page = pageFirst
         presenter.getData()

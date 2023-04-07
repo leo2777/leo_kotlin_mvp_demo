@@ -58,6 +58,8 @@ ext {
             flexBoxLayout        : "3.0.0",
             // 本地储存 dataStore (替换sp)
             dataStore            : "1.0.0",
+            //webView
+            agentWeb             : "v5.0.6-androidx"
     ]
 
     /**
@@ -113,10 +115,12 @@ ext {
             //recyclerView  适配器 （BRVAH）
             adapterHelper              : "io.github.cymchad:BaseRecyclerViewAdapterHelper:$version.adapterHelper",
             //流式布局
-            flexBoxLayout               : "com.google.android.flexbox:flexbox:$version.flexBoxLayout",
+            flexBoxLayout              : "com.google.android.flexbox:flexbox:$version.flexBoxLayout",
             // 本地储存 dataStore (替换sp)
             dataStore                  : "androidx.datastore:datastore-preferences:$version.dataStore",
             dataStoreCore              : "androidx.datastore:datastore-preferences-core:$version.dataStore",
+
+            agentWeb                   : "com.github.Justson.AgentWeb:agentweb-core:$version.agentWeb"
     ]
 
 }

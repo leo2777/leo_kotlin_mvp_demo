@@ -1,7 +1,5 @@
 package leo.study.kotlin_mvp_demo.ui.mvp.fragment.user
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -11,7 +9,8 @@ import leo.study.kotlin_mvp_demo.beans.UserInfoBean
 import leo.study.kotlin_mvp_demo.databinding.FragmentUserBinding
 import leo.study.kotlin_mvp_demo.ui.mvp.activity.login_or_register.LoginOrRegisterActivity
 import leo.study.lib_base.ext.load
-import leo.study.lib_base.ext.showLogE
+import leo.study.lib_base.ext.onClick
+import leo.study.lib_base.ext.setClickViews
 import leo.study.lib_base.ext.startActivity
 import leo.study.lib_base.mvp.BaseMvpFragment
 
@@ -36,35 +35,36 @@ class UserFragment : BaseMvpFragment<FragmentUserBinding, Contract.View, Contrac
 
 
     override fun initView(view: View) {
-        binding.linMyGrade.setOnClickListener(this)
-        binding.linMyCollect.setOnClickListener(this)
-        binding.linMyShare.setOnClickListener(this)
-        binding.linSetting.setOnClickListener(this)
-        binding.linMyAbout.setOnClickListener(this)
-        binding.linNoLogin.setOnClickListener(this)
-        binding.btnLogin.setOnClickListener(this)
-
-
+        setClickViews(
+            binding.linMyGrade,
+            binding.linMyCollect,
+            binding.linMyShare,
+            binding.linSetting,
+            binding.linMyAbout,
+            binding.linNoLogin,
+            binding.btnLogin
+        )
     }
 
     override fun lazyLoad() {
     }
+
     override fun onUserInfoResult(result: UserInfoBean) {
         result.run {
             binding.imgUserHead.load(this.userInfo.icon)
             binding.tvMeId.text = this.userInfo.id.toString()
-            binding.tvMeLevel.text= "等级：${this.coinInfo.level}"
+            binding.tvMeLevel.text = "等级：${this.coinInfo.level}"
             binding.tvMeName.text = this.userInfo.nickname
-            binding.tvMeRank.text="排名：${this.coinInfo.rank}"
+            binding.tvMeRank.text = "排名：${this.coinInfo.rank}"
             binding.tvMyGrade.text = this.userInfo.coinCount.toString()
         }
     }
 
     override fun onIsLogin(login: Boolean) {
-        if (login){
+        if (login) {
             binding.linNoLogin.visibility = GONE
             presenter.getUserInfo()
-        }else{
+        } else {
             binding.linNoLogin.visibility = VISIBLE
         }
 

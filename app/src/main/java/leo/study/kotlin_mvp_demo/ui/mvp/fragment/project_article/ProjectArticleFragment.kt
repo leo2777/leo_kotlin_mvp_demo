@@ -8,7 +8,9 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.databinding.FragmentProjectArticleBinding
+import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
 import leo.study.lib_base.ext.showError
+import leo.study.lib_base.ext.startActivity
 import leo.study.lib_base.mvp.BaseMvpFragment
 
 
@@ -63,6 +65,13 @@ class ProjectArticleFragment : BaseMvpFragment<
             }
 
         })
+
+        projectAdapter.setOnItemClickListener{_,_,position ->
+            val bundle = Bundle()
+            bundle.putString("url",projectAdapter.getItem(position)?.link)
+            bundle.putString("name",projectAdapter.getItem(position)?.title)
+            requireContext().startActivity<CommonWebViewActivity>(bundle)
+        }
 
         binding.recProjectArticlesList.adapter = this.projectAdapter
     }

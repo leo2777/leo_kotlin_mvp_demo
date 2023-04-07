@@ -11,7 +11,9 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import leo.study.kotlin_mvp_demo.beans.Articles
 import leo.study.kotlin_mvp_demo.databinding.FragmentMoreNaviDescBinding
+import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
 import leo.study.lib_base.base.BaseFragment
+import leo.study.lib_base.ext.startActivity
 
 
 /**
@@ -59,6 +61,13 @@ class NavigationDescFragment : BaseFragment<FragmentMoreNaviDescBinding>() {
 
         binding.recMoreNaviDescCategoryList.layoutManager = layoutManager
         binding.recMoreNaviDescCategoryList.adapter = this.adapter
+
+        adapter.setOnItemClickListener{ _,_,position ->
+            val bundle = Bundle()
+            bundle.putString("url",adapter.getItem(position)?.link)
+            bundle.putString("name",adapter.getItem(position)?.title)
+            requireContext().startActivity<CommonWebViewActivity>(bundle)
+        }
     }
 
 
