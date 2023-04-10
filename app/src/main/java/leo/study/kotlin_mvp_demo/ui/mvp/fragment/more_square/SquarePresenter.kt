@@ -38,4 +38,16 @@ class SquarePresenter:BasePresenter<SquareContract.View>(),SquareContract.Presen
             view?.onResult(it.data)
         }
     }
+
+    override fun collect(id: String, position: Int) {
+        model?.collect(id)?.leoSubscribe {
+            view?.onCollectSuccess(position)
+        }
+    }
+
+    override fun cancelCollect(id: String, position: Int) {
+        model?.cancelCollect(id)?.leoSubscribe {
+            view?.onCancelCollectSuccess(position)
+        }
+    }
 }

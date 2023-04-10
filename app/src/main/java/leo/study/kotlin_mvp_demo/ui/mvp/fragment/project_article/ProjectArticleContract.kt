@@ -31,6 +31,12 @@ interface ProjectArticleContract {
          * @param result 结果数据实体
          */
         fun getArticleSuccess(result:ArticlePage)
+
+
+
+        fun onCollectSuccess(position: Int)
+
+        fun onCancelCollectSuccess(position: Int)
     }
 
 
@@ -42,6 +48,13 @@ interface ProjectArticleContract {
          * @param id 类ID
          */
         fun getArticles(page:Int,id:String)
+
+
+
+
+        fun collect(id: String,position: Int)
+
+        fun cancelCollect(id: String,position: Int)
     }
 
     interface Model:IModel{
@@ -53,5 +66,11 @@ interface ProjectArticleContract {
          * @return 列表数据实体
          */
         fun getArticles(page:Int,id:String): Observable<BaseRequest<ArticlePage>>
+
+
+
+        fun collect(id:String):Observable<BaseRequest<Any>>
+
+        fun cancelCollect(id:String):Observable<BaseRequest<Any>>
     }
 }

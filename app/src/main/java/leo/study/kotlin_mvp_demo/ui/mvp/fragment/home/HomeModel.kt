@@ -34,5 +34,13 @@ class HomeModel :BaseModel(),HomeContract.Model {
         return MainRetrofit().apiService.getTopArticles()
     }
 
+    override fun collectArticle(id: String): Observable<BaseRequest<Any>> {
+        return MainRetrofit().apiService.collectArticle(id)
+    }
+
+    override fun cancelCollectArticle(id: String): Observable<BaseRequest<Any>> {
+        return MainRetrofit().apiService.cancelCollectArticle(id)
+    }
+
 
 }

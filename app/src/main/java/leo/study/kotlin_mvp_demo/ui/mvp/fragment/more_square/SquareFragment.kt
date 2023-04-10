@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import leo.study.kotlin_mvp_demo.R
@@ -12,6 +11,7 @@ import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.databinding.FragmentSquareBinding
 import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeArticleAdapter
+import leo.study.lib_base.ext.showSuccess
 import leo.study.lib_base.ext.startActivity
 import leo.study.lib_base.mvp.BaseMvpFragment
 
@@ -31,11 +31,11 @@ import leo.study.lib_base.mvp.BaseMvpFragment
 class SquareFragment : BaseMvpFragment<
         FragmentSquareBinding,
         SquareContract.View,
-        SquareContract.Presenter>(),SquareContract.View {
+        SquareContract.Presenter>(), SquareContract.View {
 
     private val pageFirst = 0
     private var page = pageFirst
-    private val adapter:HomeArticleAdapter by lazy { HomeArticleAdapter() }
+    private val adapter: HomeArticleAdapter by lazy { HomeArticleAdapter() }
 
 
     override var presenter: SquareContract.Presenter = SquarePresenter()
@@ -44,11 +44,11 @@ class SquareFragment : BaseMvpFragment<
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentSquareBinding {
-        return FragmentSquareBinding.inflate(inflater,container,false)
+        return FragmentSquareBinding.inflate(inflater, container, false)
     }
 
     override fun initView(view: View) {
-        binding.refreshMoreSquare.setOnRefreshLoadMoreListener(object :OnRefreshLoadMoreListener{
+        binding.refreshMoreSquare.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 page = pageFirst
                 presenter.refresh()
@@ -62,11 +62,21 @@ class SquareFragment : BaseMvpFragment<
 
         binding.recMoreSquareArticlesList.adapter = this.adapter
 
-        adapter.setOnItemClickListener{ _,_,position ->
+        adapter.setOnItemClickListener { _, _, position ->
             val bundle = Bundle()
-            bundle.putString("url",adapter.getItem(position)?.link)
-            bundle.putString("name",adapter.getItem(position)?.title)
+            bundle.putString("url", adapter.getItem(position)?.link)
+            bundle.putString("name", adapter.getItem(position)?.title)
             requireContext().startActivity<CommonWebViewActivity>(bundle)
+        }
+
+        adapter.addOnItemChildClickListener(R.id.img_ada_home_article_collect) { _, _, position ->
+            adapter.getItem(position)?.run {
+                if (this.collect) {
+                    presenter.cancelCollect(this.id.toString(), position)
+                } else {
+                    presenter.collect(this.id.toString(), position)
+                }
+            }
         }
 
         page = pageFirst
@@ -83,11 +93,23 @@ class SquareFragment : BaseMvpFragment<
 
         binding.refreshMoreSquare.setNoMoreData(result.over)
 
-        if (page == pageFirst){
+        if (page == pageFirst) {
             adapter.submitList(result.articles)
-        }else{
+        } else {
             adapter.addAll(result.articles)
         }
+    }
+
+    override fun onCollectSuccess(position: Int) {
+        requireContext().showSuccess("收藏成功！")
+        adapter.getItem(position)?.collect = true
+        adapter.notifyItemChanged(position)
+    }
+
+    override fun onCancelCollectSuccess(position: Int) {
+        requireContext().showSuccess("取消收藏！")
+        adapter.getItem(position)?.collect = false
+        adapter.notifyItemChanged(position)
     }
 
 }

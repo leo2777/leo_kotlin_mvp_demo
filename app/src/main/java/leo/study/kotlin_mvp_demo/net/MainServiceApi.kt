@@ -177,9 +177,53 @@ interface MainServiceApi {
 
 
 
+
 //==================================================================================================
 
-
-    @GET("/user/lg/userinfo/json")
+    /**
+     * 获取个人信息
+     *
+     * @return
+     */
+    @GET("user/lg/userinfo/json")
     fun getUserInfo():Observable<BaseRequest<UserInfoBean>>
+
+
+
+
+//==================================================================================================
+
+    //收藏相关
+
+    /**
+     * 收藏文章
+     *
+     * @param id 文章ID
+     * @return
+     */
+    @POST("lg/collect/{id}/json")
+    fun collectArticle(@Path("id") id:String):Observable<BaseRequest<Any>>
+
+
+    /**
+     * 取消收藏文章
+     *
+     * @param id 文章ID
+     * @return
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    fun cancelCollectArticle(@Path("id") id:String):Observable<BaseRequest<Any>>
+
+
+    /**
+     * 获取我的收藏列表
+     *
+     * @param page 页数
+     * @return
+     */
+    @GET("lg/collect/list/{page}/json")
+    fun getMyCollectList(@Path("page") page:Int):Observable<BaseRequest<ArticlePage>>
+
+
+
 }

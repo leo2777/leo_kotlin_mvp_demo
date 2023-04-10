@@ -209,6 +209,20 @@ open class GlideLoaderProcessor(options: ImageOptions?) : ImageProxy {
         return obtain()
     }
 
+    override fun loadCircleImage(view: View?, url: Int?): ImageProxy {
+        if (view is ImageView) {
+            options.context?.let {
+                Glide
+                    .with(it)
+                    .setDefaultRequestOptions(requestOptions)
+                    .applyDefaultRequestOptions(RequestOptions.bitmapTransform(CircleCrop()))
+                    .load(url)
+                    .into(view)
+            }
+        }
+        return obtain()
+    }
+
     /**
      * 加载圆角图片
      * @param [view] 显示的view

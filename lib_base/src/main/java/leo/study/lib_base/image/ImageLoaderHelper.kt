@@ -133,6 +133,11 @@ class ImageLoaderHelper private constructor() : ImageProxy {
         return proxy?.loadCircleImage(view, url)!!
     }
 
+    override fun loadCircleImage(view: View?, url: Int?): ImageProxy {
+        judgeProxyNullable()
+        return proxy?.loadCircleImage(view, url)!!
+    }
+
     /**
      * 加载圆角图片
      * @param [view] 显示的view

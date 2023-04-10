@@ -25,6 +25,18 @@ class ProjectArticlePresenter:BasePresenter<ProjectArticleContract.View>(),Proje
         }
     }
 
+    override fun collect(id: String, position: Int) {
+        model?.collect(id)?.leoSubscribe {
+            view?.onCollectSuccess(position)
+        }
+    }
+
+    override fun cancelCollect(id: String, position: Int) {
+        model?.cancelCollect(id)?.leoSubscribe {
+            view?.onCancelCollectSuccess(position)
+        }
+    }
+
     override var model: ProjectArticleContract.Model? = ProjectArticleModel()
 
 }

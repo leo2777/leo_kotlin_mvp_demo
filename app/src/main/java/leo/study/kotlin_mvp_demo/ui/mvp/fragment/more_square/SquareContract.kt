@@ -31,6 +31,10 @@ interface SquareContract {
          * @param result 数据实体
          */
         fun onResult(result: ArticlePage)
+
+        fun onCollectSuccess(position: Int)
+
+        fun onCancelCollectSuccess(position: Int)
     }
 
 
@@ -51,6 +55,12 @@ interface SquareContract {
          * @param page 页数
          */
         fun load(page:Int)
+
+
+        fun collect(id: String,position: Int)
+
+
+        fun cancelCollect(id: String,position: Int)
     }
 
     interface Model:IModel{
@@ -61,5 +71,9 @@ interface SquareContract {
          * @return 数据实体
          */
         fun getArticles(page:Int):Observable<BaseRequest<ArticlePage>>
+
+        fun collect(id: String):Observable<BaseRequest<Any>>
+
+        fun cancelCollect(id: String):Observable<BaseRequest<Any>>
     }
 }

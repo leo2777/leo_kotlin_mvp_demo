@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.databinding.FragmentWeChatArticleBinding
 import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
 import leo.study.kotlin_mvp_demo.ui.mvp.fragment.home.HomeArticleAdapter
 import leo.study.lib_base.ext.showError
+import leo.study.lib_base.ext.showSuccess
 import leo.study.lib_base.ext.startActivity
 import leo.study.lib_base.mvp.BaseMvpFragment
 
@@ -71,6 +73,16 @@ class WeChatArticleFragment : BaseMvpFragment<FragmentWeChatArticleBinding,
             requireContext().startActivity<CommonWebViewActivity>(bundle)
         }
 
+        adapter.addOnItemChildClickListener(R.id.img_ada_home_article_collect){ _,_,position ->
+            adapter.getItem(position)?.run {
+                if (this.collect){
+                    presenter.cancelCollect(this.id.toString(),position)
+                }else{
+                    presenter.collect(this.id.toString(),position)
+                }
+            }
+        }
+
         binding.recWeChatArticlesList.adapter = this.adapter
     }
 
@@ -89,10 +101,22 @@ class WeChatArticleFragment : BaseMvpFragment<FragmentWeChatArticleBinding,
 
         binding.refreshWeChat.setNoMoreData(result.over)
 
-        if (page == 0) {
+        if (page == firstPage) {
             adapter.submitList(result.articles)
         } else {
             adapter.addAll(result.articles)
         }
+    }
+
+    override fun onCollectSuccess(position: Int) {
+        requireContext().showSuccess("收藏成功！")
+        adapter.getItem(position)?.collect = true
+        adapter.notifyItemChanged(position)
+    }
+
+    override fun onCancelCollectSuccess(position: Int) {
+        requireContext().showSuccess("取消收藏！")
+        adapter.getItem(position)?.collect = false
+        adapter.notifyItemChanged(position)
     }
 }

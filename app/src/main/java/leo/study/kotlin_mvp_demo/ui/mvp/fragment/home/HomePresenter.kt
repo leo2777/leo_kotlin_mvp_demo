@@ -68,4 +68,16 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
         }
     }
 
+    override fun collectArticle(id: String,position:Int) {
+        model?.collectArticle(id)?.leoSubscribe(view,model) {
+            view?.onCollectArticleSuccess(position)
+        }
+    }
+
+    override fun cancelCollectArticle(id: String,position:Int) {
+        model?.cancelCollectArticle(id)?.leoSubscribe(view,model) {
+            view?.onCancelCollectArticleSuccess(position)
+        }
+    }
+
 }

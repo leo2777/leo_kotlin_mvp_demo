@@ -24,4 +24,12 @@ class SquareModel:BaseModel(),SquareContract.Model{
     override fun getArticles(page: Int): Observable<BaseRequest<ArticlePage>> {
         return MainRetrofit().apiService.getSquareArticles(page)
     }
+
+    override fun collect(id: String): Observable<BaseRequest<Any>> {
+        return MainRetrofit().apiService.collectArticle(id)
+    }
+
+    override fun cancelCollect(id: String): Observable<BaseRequest<Any>> {
+        return MainRetrofit().apiService.cancelCollectArticle(id)
+    }
 }

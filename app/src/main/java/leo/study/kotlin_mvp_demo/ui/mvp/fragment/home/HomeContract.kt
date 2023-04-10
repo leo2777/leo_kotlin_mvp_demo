@@ -38,6 +38,11 @@ interface HomeContract {
          * @param [result] 数据实体
          */
         fun getListDataSuccess(result:ArticlePage)
+
+
+        fun onCollectArticleSuccess(position:Int)
+
+        fun onCancelCollectArticleSuccess(position:Int)
     }
 
     interface Presenter: IPresenter<View,Model>{
@@ -60,6 +65,10 @@ interface HomeContract {
          */
         fun getArticles(pageNum:Int)
 
+        fun collectArticle(id:String,position:Int)
+
+        fun cancelCollectArticle(id:String,position:Int)
+
 
     }
 
@@ -80,5 +89,9 @@ interface HomeContract {
          */
         fun getTopArticles():Observable<BaseRequest<MutableList<Articles>>>
 
+
+        fun collectArticle(id:String):Observable<BaseRequest<Any>>
+
+        fun cancelCollectArticle(id:String):Observable<BaseRequest<Any>>
     }
 }

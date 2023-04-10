@@ -34,4 +34,18 @@ override var model: WeChatArticleContract.Model? = WeChatArticleModel()
         }
     }
 
+
+
+    override fun collect(id: String, position: Int) {
+        model?.collect(id)?.leoSubscribe {
+            view?.onCollectSuccess(position)
+        }
+    }
+
+    override fun cancelCollect(id: String, position: Int) {
+        model?.cancelCollect(id)?.leoSubscribe {
+            view?.onCancelCollectSuccess(position)
+        }
+    }
+
 }

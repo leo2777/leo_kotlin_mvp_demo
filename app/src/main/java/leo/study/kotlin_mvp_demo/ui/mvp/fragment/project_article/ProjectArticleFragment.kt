@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
 import leo.study.kotlin_mvp_demo.databinding.FragmentProjectArticleBinding
 import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
 import leo.study.lib_base.ext.showError
+import leo.study.lib_base.ext.showSuccess
 import leo.study.lib_base.ext.startActivity
 import leo.study.lib_base.mvp.BaseMvpFragment
 
@@ -73,6 +75,16 @@ class ProjectArticleFragment : BaseMvpFragment<
             requireContext().startActivity<CommonWebViewActivity>(bundle)
         }
 
+        projectAdapter.addOnItemChildClickListener(R.id.img_ada_project_article_collect){_,_,position ->
+            projectAdapter.getItem(position)?.run {
+                if (this.collect){
+                    presenter.cancelCollect(this.id.toString(),position)
+                }else{
+                    presenter.collect(this.id.toString(),position)
+                }
+            }
+        }
+
         binding.recProjectArticlesList.adapter = this.projectAdapter
     }
 
@@ -97,6 +109,18 @@ class ProjectArticleFragment : BaseMvpFragment<
         } else {
             projectAdapter.addAll(result.articles)
         }
+    }
+
+    override fun onCollectSuccess(position: Int) {
+        requireContext().showSuccess("收藏成功！")
+        projectAdapter.getItem(position)?.collect = true
+        projectAdapter.notifyItemChanged(position)
+    }
+
+    override fun onCancelCollectSuccess(position: Int) {
+        requireContext().showSuccess("取消收藏！")
+        projectAdapter.getItem(position)?.collect = false
+        projectAdapter.notifyItemChanged(position)
     }
 
 }

@@ -82,6 +82,15 @@ interface ImageProxy {
      */
     fun loadCircleImage(view: View?, url: String?): ImageProxy
 
+
+    /**
+     * 加载圆形图片
+     * @param [view] 显示view
+     * @param [url] 图片地址
+     * @return 当前代理类
+     */
+    fun loadCircleImage(view: View?, url: Int?): ImageProxy
+
     /**
      * 加载圆角图片
      * @param [view] 显示的view

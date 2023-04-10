@@ -24,4 +24,13 @@ class WeChatArticleModel : BaseModel(),WeChatArticleContract.Model {
     override fun getArticles(authorId: String, page: Int): Observable<BaseRequest<ArticlePage>> {
         return MainRetrofit().apiService.getWeChatArticle(authorId,page)
     }
+
+
+    override fun collect(id: String): Observable<BaseRequest<Any>> {
+        return MainRetrofit().apiService.collectArticle(id)
+    }
+
+    override fun cancelCollect(id: String): Observable<BaseRequest<Any>> {
+        return MainRetrofit().apiService.cancelCollectArticle(id)
+    }
 }

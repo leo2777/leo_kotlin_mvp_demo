@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.beans.UserInfoBean
 import leo.study.kotlin_mvp_demo.databinding.FragmentUserBinding
+import leo.study.kotlin_mvp_demo.ui.mvp.activity.collect.MyCollectActivity
 import leo.study.kotlin_mvp_demo.ui.mvp.activity.login_or_register.LoginOrRegisterActivity
-import leo.study.lib_base.ext.load
-import leo.study.lib_base.ext.onClick
-import leo.study.lib_base.ext.setClickViews
-import leo.study.lib_base.ext.startActivity
+import leo.study.lib_base.ext.*
 import leo.study.lib_base.mvp.BaseMvpFragment
 
 
@@ -51,7 +49,11 @@ class UserFragment : BaseMvpFragment<FragmentUserBinding, Contract.View, Contrac
 
     override fun onUserInfoResult(result: UserInfoBean) {
         result.run {
-            binding.imgUserHead.load(this.userInfo.icon)
+            if (this.userInfo.icon.isEmpty()){
+                binding.imgUserHead.loadCircle(R.mipmap.icon_default_head)
+            }else{
+                binding.imgUserHead.loadCircle(this.userInfo.icon)
+            }
             binding.tvMeId.text = this.userInfo.id.toString()
             binding.tvMeLevel.text = "等级：${this.coinInfo.level}"
             binding.tvMeName.text = this.userInfo.nickname
@@ -75,9 +77,7 @@ class UserFragment : BaseMvpFragment<FragmentUserBinding, Contract.View, Contrac
         when (view.id) {
             R.id.lin_my_about -> {
             }
-            R.id.lin_my_collect -> {
-
-            }
+            R.id.lin_my_collect -> requireContext().startActivity<MyCollectActivity>()
             R.id.lin_setting -> {
 
             }

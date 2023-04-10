@@ -272,6 +272,16 @@ fun ImageView.loadCircle(url: String) {
     let { ImageLoaderHelper.instance.loadCircleImage(it, url) }
 }
 
+
+/**
+ * 加载图片并裁剪成圆形
+ *
+ * @param [url] 图片地址
+ */
+fun ImageView.loadCircle(url: Int) {
+    let { ImageLoaderHelper.instance.loadCircleImage(it, url) }
+}
+
 /**
  * 加载图片 并设定 圆角
  *

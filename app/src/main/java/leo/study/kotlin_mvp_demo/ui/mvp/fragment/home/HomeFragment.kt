@@ -5,17 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
+import leo.study.kotlin_mvp_demo.R
 import leo.study.kotlin_mvp_demo.beans.ArticlePage
+import leo.study.kotlin_mvp_demo.beans.Articles
 import leo.study.kotlin_mvp_demo.beans.BannerModel
 import leo.study.lib_base.mvp.BaseMvpFragment
 import leo.study.kotlin_mvp_demo.databinding.FragmentHomeBinding
 import leo.study.kotlin_mvp_demo.ui.activity.CommonWebViewActivity
 import leo.study.lib_base.ext.load
+import leo.study.lib_base.ext.showSuccess
 import leo.study.lib_base.ext.startActivity
 
 /**
@@ -101,6 +105,17 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContract.View,
             bundle.putString("name",homeAdapter.getItem(position)?.title)
             requireContext().startActivity<CommonWebViewActivity>(bundle)
         }
+
+        homeAdapter.addOnItemChildClickListener(R.id.img_ada_home_article_collect
+        ) { _, _, position ->
+            homeAdapter.getItem(position)?.run {
+                if (this.collect){
+                    presenter.cancelCollectArticle(this.id.toString(),position)
+                }else{
+                    presenter.collectArticle(this.id.toString(),position)
+                }
+            }
+        }
     }
 
 
@@ -150,6 +165,18 @@ class HomeFragment : BaseMvpFragment<FragmentHomeBinding, HomeContract.View,
         } else {
             homeAdapter.addAll(result.articles)
         }
+    }
+
+    override fun onCollectArticleSuccess(position:Int) {
+        homeAdapter.getItem(position)?.collect = true
+        homeAdapter.notifyItemChanged(position)
+        requireContext().showSuccess("收藏成功！")
+    }
+
+    override fun onCancelCollectArticleSuccess(position: Int) {
+        homeAdapter.getItem(position)?.collect = false
+        homeAdapter.notifyItemChanged(position)
+        requireContext().showSuccess("取消收藏！")
     }
 
 }

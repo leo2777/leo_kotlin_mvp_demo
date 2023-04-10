@@ -22,7 +22,7 @@ import leo.study.lib_base.mvp.IView
  */
 interface WeChatContract {
 
-    interface View:IView<Presenter>{
+    interface View : IView<Presenter> {
         /**
          * 请求成功 数据回调
          *
@@ -31,7 +31,7 @@ interface WeChatContract {
         fun getCategorySuccess(result:MutableList<ArticleCategory>)
     }
 
-    interface Presenter:IPresenter<View,Model>{
+    interface Presenter : IPresenter<View, Model> {
         /**
          * 获取数据
          *
@@ -39,12 +39,12 @@ interface WeChatContract {
         fun getCategory()
     }
 
-    interface Model:IModel{
+    interface Model : IModel {
         /**
          * 获取数据
          *
          * @return
          */
-        fun getCategory():Observable<BaseRequest<MutableList<ArticleCategory>>>
+        fun getCategory(): Observable<BaseRequest<MutableList<ArticleCategory>>>
     }
 }

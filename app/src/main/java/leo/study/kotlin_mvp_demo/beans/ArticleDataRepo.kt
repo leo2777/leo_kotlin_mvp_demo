@@ -156,7 +156,7 @@ data class Articles(
     @SerializedName("canEdit") val canEdit: Boolean,
     @SerializedName("chapterId") val chapterId: Int,
     @SerializedName("chapterName") val chapterName: String,
-    @SerializedName("collect") val collect: Boolean,
+    @SerializedName("collect") var collect: Boolean,
     @SerializedName("courseId") val courseId: Int,
     @SerializedName("desc") val desc: String,
     @SerializedName("descMd") val descMd: String,

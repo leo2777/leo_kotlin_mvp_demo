@@ -24,4 +24,12 @@ class ProjectArticleModel:BaseModel(),ProjectArticleContract.Model {
     override fun getArticles(page: Int,id:String): Observable<BaseRequest<ArticlePage>> {
         return MainRetrofit().apiService.getProjectArticles(page,id)
     }
+
+    override fun collect(id: String): Observable<BaseRequest<Any>> {
+        return MainRetrofit().apiService.collectArticle(id)
+    }
+
+    override fun cancelCollect(id: String): Observable<BaseRequest<Any>> {
+        return MainRetrofit().apiService.cancelCollectArticle(id)
+    }
 }

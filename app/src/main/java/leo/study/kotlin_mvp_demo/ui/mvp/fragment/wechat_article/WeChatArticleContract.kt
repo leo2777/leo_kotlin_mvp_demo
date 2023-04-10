@@ -24,6 +24,11 @@ interface WeChatArticleContract {
 
     interface View:IView<Presenter>{
         fun getArticleSuccess(result:ArticlePage)
+
+
+        fun onCollectSuccess(position: Int)
+
+        fun onCancelCollectSuccess(position: Int)
     }
 
 
@@ -31,9 +36,18 @@ interface WeChatArticleContract {
         fun refresh(authorId: String)
 
         fun load(authorId: String,page: Int)
+
+        fun collect(id: String,position: Int)
+
+        fun cancelCollect(id: String,position: Int)
     }
 
     interface Model:IModel{
         fun getArticles(authorId:String,page:Int):Observable<BaseRequest<ArticlePage>>
+
+
+        fun collect(id: String): Observable<BaseRequest<Any>>
+
+        fun cancelCollect(id: String): Observable<BaseRequest<Any>>
     }
 }
